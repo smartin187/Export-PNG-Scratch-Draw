@@ -1618,13 +1618,6 @@ def couleur_du_fond(couleur):
 
 #       -----------------------------------------------------
 
-#démarage du programme pour l'utilisateur
-
-print ("Bienvenu")
-print ("ce logiciel vous permet d'exporter les fichier de ce programme Scratch https://scratch.mit.edu/projects/782765473/ en .png")
-print ("___________________________")
-print ("")
-
 global annuler_ouverture
 annuler_ouverture=False
 
@@ -1658,6 +1651,9 @@ def ouverture_fichier_choix_d_ouverture():
     choix_d_ouvertre_bouton_ouvrir_en_collan = Button(fênetre_choix_d_ouverture, text="Ouvrir un fichier en le collen avec le presse papier", command=ouverture_par_le_press_papier)
     choix_d_ouvertre_bouton_ouvrir_en_collan.pack()
 
+    annuler_choix_d_ouverture=Button(fênetre_choix_d_ouverture, text="Annuler", command=fênetre_choix_d_ouverture.destroy)
+    annuler_choix_d_ouverture.pack()
+
     fênetre_choix_d_ouverture.mainloop()
     if fermeture_volontaire["fermeture_ouverture_fichier_choix_d_ouverture"]==False:     #la fermeture n'est pas volontaire, mais elle a était fait par l'utilisateur
         menu_principal()
@@ -1687,7 +1683,8 @@ def ouverture_par_le_press_papier():
     fênetre_ouverture_press_papier_boutton_valider=Button(fênetre_ouverture_press_papier, text="Valider", command=valider_chan_texte_ouverture)
     fênetre_ouverture_press_papier_boutton_valider.pack()
 
-    #annuler_press_papier=Button(fênetre_ouverture_press_papier, text="Annuler", command=fênetre_ouverture_press_papier.destroy())
+    annuler_press_papier=Button(fênetre_ouverture_press_papier, text="Annuler", command=fênetre_ouverture_press_papier.destroy)
+    annuler_press_papier.pack()
 
     fênetre_ouverture_press_papier.mainloop()
     
@@ -1706,10 +1703,26 @@ def valider_chan_texte_ouverture():
     chant_texte_temporaire=chant_texte_du_fichier.get()
 
     fênetre_ouverture_press_papier.destroy()
+    fênetre_ouverture_en_cours()
 
+fênetre_ouverture_en_cours_barre_de_progresion=None
+
+def fênetre_ouverture_en_cours():
+    global chant_texte_temporaire
+    global fênetre_ouverture_en_cours_barre_de_progresion
+    fênetre_ouverture_en_cours_barre_de_progresion=Tk()
+    fênetre_ouverture_en_cours_barre_de_progresion.title("Ouverture en cours...")
+
+    texte_ouverture_en_cours=Label(fênetre_ouverture_en_cours_barre_de_progresion, text="L'ouverture est en cours, merci de patienter...")
+    texte_ouverture_en_cours.pack()
     
+    global fichier
+    fichier=chant_texte_temporaire
 
-# fin intercafe graphique -----------------------------------------------------------------------------------------------------
+    fênetre_ouverture_en_cours_barre_de_progresion.after(1, ouverture_fichier_principal)
+
+    fênetre_ouverture_en_cours_barre_de_progresion.mainloop()
+
 
 fênetre_principal=None
 d=None
@@ -1718,6 +1731,7 @@ image=None
 
 fichier=None
 def menu_principal():
+    """Fenetre graphique du menu principal."""
     global fênetre_principal
     fênetre_principal = Tk()
     fênetre_principal.title("Export PNG Scratch Draw")
@@ -1729,256 +1743,217 @@ def menu_principal():
 
     fênetre_principal.mainloop()
 
-    #AVANT LA FËNETRE ------------------------------------
-    #if ecriture_menue_principal==True:
+# fin intercafe graphique -----------------------------------------------------------------------------------------------------
 
-    #    annuler_ouverture=False
+def ouverture_fichier_principal():        
+    """Cette fonction gère l'ouverture d'un fichier. Elle utilise d'autre fonction pour analiser plus précisément les élément et pour tracer les élément."""
+    
+    # variable / dicionaire global
+    global fichier
+    global information_sur_carré
+    global information_sur_cercle
+    global information_sur_point
+    global information_sur_rectangle
+    global information_sur_remplisage
+    global information_sur_triangle
+    
+            
+    global image
+    image = Image.new('RGBA', (480, 360), color = (255, 255, 255, 0))
+            
+    global d
+    d = ImageDraw.Draw(image)
 
-    #    print ("")
-    #    print ("----  MENU PRINCIPAL  ----")
-    #    print ("")
+    imageforme = Image.new('RGBA', (480, 360), color = (255, 255, 255, 0))
+    global d_forme
+    d_forme = ImageDraw.Draw(imageforme)
 
-    #    print ("Commandes :")
-    #    print ("   Appuiller sur Entée pour ouvrir un fichier")
-    #    print ("   Ecriver Q pour quitter")
+    caractèrelecture = 0
 
-    #    commande_menu=input("")
 
-    #    if commande_menu=="":
-    #        fichier = input("Coller les chiffres de scratch draw : ")
-    #        ouverture_fichier=True
+    # Afficher la taille du fichier
+    logging.debug("Taille du fichier : " + str(len(fichier)))
+    logging.debug("contenu du fichier : " + fichier )
+
+    # premier controle du fichier : la longueur
+    if len(fichier)<13:
+        print("Votre fichier contient une taille anormale de caratrères. Il est donc potentiellement corrompu, ou provient d'une vertion différnete de Scratch Draw.")
+        print("Appuiller sur Entrée pour ouvrir ce fichier et Q pour quiter.")
+        réponse_controle_fichier_longueur=input("")
+
+        if réponse_controle_fichier_longueur=="":
+            print ("Le fichier sera ouver, mais il y a des risque de dysfonctionnement...")
+
+        elif (réponse_controle_fichier_longueur=="q") or (réponse_controle_fichier_longueur=="Q"):
+            logging.debug("l'ouverture du fichier est anulé en raison de la taille anormal")
+            annuler_ouverture=True
+    
+    # Elément de fin de fichier       -----------------------
+
+    logging.debug ("fichier[-1] " + fichier[-1])
+    logging.debug ("fichier[-2] " + fichier[-2])
+    logging.debug ("fichier[-3] " + fichier[-3])
+
+    if (fichier[-1] == "0"):
+        logging.debug ("vertion du fichier (0) correcte")
+    
+    elif (fichier[-1] == "1"):
+        logging.debug ("Vertion du fichier (1) correcte")
         
-    #    elif commande_menu=="Q" or commande_menu=="q":
-    #        break
+    else:
+        print ("Attention : votre fichier a une version différente de celle de ce générateur.")
+        print ("Les vertion suporté sont : v0, v1")
+        print ("La vertion du fichier est : " + fichier[-1])
 
-    #    ecriture_menue_principal=False
-    #--------------------------------------------------
+        print ("Appuiller sur Entée pour continuer et Q pour quitter")
+
+        ouvrir_un_fichier_avec_mauvaise_vertion=input("")
+
+        if ouvrir_un_fichier_avec_mauvaise_vertion == "":
+            print ("Le fichier sera ouvert, mais il y a des risques de dysfonctionnement...")
+        
+        elif ouvrir_un_fichier_avec_mauvaise_vertion == "Q" or ouvrir_un_fichier_avec_mauvaise_vertion == "q":
+            annuler_ouverture=True
+
+        else:
+            print ("commande inconue")
+
+    fond = {"Grille" : bool(int(fichier[-2])), "couleur_de_l'arière_plant" : fichier[-3]}
+
+    logging.debug("contenue dictionaire fond : " + str(fond))
+
+    annuler_ouverture=False
+
+    while not (len(fichier) == caractèrelecture + 1):
+
+        if annuler_ouverture == True:
+            print ("Louverture a était anuler, vous pouver ouvrir un nouveau fichier...")
+            break
+
+        logging.debug("caractère en cours de lecture : " + fichier[caractèrelecture])
+
+        if fichier[caractèrelecture] == "1": # détéction d'un point
+            caractèrelecture = caractèrelecture + 1
+            caractèrelecture = point(caractèrelecture)
+
+            tracer_point()
+
+            information_sur_point = {"couleur":"0", "coord_x":"0", "coord_y": "0", "taille": "0"} #réinisialisation du dicionaire point
+
+        elif fichier[caractèrelecture] == "2": # détéction d'un cercle
+            caractèrelecture = caractèrelecture + 1
+
+            caractèrelecture = cercle(caractèrelecture)
+
+            tracer_cercle()
+
+            information_sur_cercle = {"couleur fond":"0", "couleur contour":"0", "coord_x":"0", "coord_y": "0", "taille": "0"} #réinisialisation du dicionaire cercle
+
+        elif fichier[caractèrelecture] == "3": # détéction d'un rectangle
+            caractèrelecture = caractèrelecture + 1
+
+            caractèrelecture = rectangle(caractèrelecture)
+
+            tracer_rectangle()
+
+            information_sur_rectangle = {"couleur fond":"0", "couleur contour":"0", "coord_x":"0", "coord_y": "0", "taille": "0"} #réinisialisation du dicionaire rectangle
+
+        elif fichier[caractèrelecture] == "4": # détéction d'un triangle
+            caractèrelecture = caractèrelecture + 1
+
+            caractèrelecture = triangle(caractèrelecture)
+
+            tracer_triangle()
+
+            information_sur_triangle = {"couleur fond":"0", "couleur contour":"0", "coord_x":"0", "coord_y": "0", "taille": "0"} #réinisialisation du dicionaire triangle
+
+        elif fichier[caractèrelecture] == "5": # détéction d'un carré
+            caractèrelecture = caractèrelecture + 1
+
+            caractèrelecture = carré(caractèrelecture)
+
+            tracer_carré()
+
+            information_sur_carré = {"couleur fond":"0", "couleur contour":"0", "coord_x":"0", "coord_y": "0", "taille": "0"} #réinisialisation du dicionaire carré
+        
+        elif fichier[caractèrelecture] == "6": # fin du fichier
+            logging.debug("fin du fichier")
+
+            print("le fichier a étais ouvert avec succé.")
+
+            varibale_pour_validation=input("Appuiller sur Entrée pour retouvner au menu principal.")
+            print("")
+
+            break
+
+        elif fichier[caractèrelecture] == "7": #remplisage
+            
+            caractèrelecture = caractèrelecture + 1                    
+            caractèrelecture = remplisage(caractèrelecture)
+
+            tracer_remplisage()
+
+            information_sur_remplisage = {"couleur":"0", "coord_x":"0", "coord_y": "0"}
+
+            logging.debug("caractèrelecture : " + str(caractèrelecture))
+            logging.debug("caractère en cours de lecture : " + fichier[caractèrelecture])
+
+        else:      # erreur : arrêt du programme
+            
+            print ("Votre fichier contient une erreur majeur (un élément inconue a était détecter)")
+            print ("Votre fichier est peut-être d'une version plus récente que celle de cette aplication.")
+            varibale_pour_validation=input("Appuiller sur Entrée pour quiter")
+
+            break
 
         
+        caractèrelecture = caractèrelecture + 1
+    
+    # fond de l'image :
 
-    if ouverture_fichier==True:
+    if fond["Grille"]==True:
+        grille()
 
-        #try:
-            ouverture_fichier=False
+    if not(fond["couleur_de_l'arière_plant"]=="0"):     # détéction d'un fond non coloré
+        if fond["couleur_de_l'arière_plant"]=="1":
+            couleur_du_fond(couleur=(0, 0, 0, 255))
 
-            global image
-            image = Image.new('RGBA', (480, 360), color = (255, 255, 255, 0))
-            
-            global d
-            d = ImageDraw.Draw(image)
+        elif fond["couleur_de_l'arière_plant"]=="2":
+            couleur_du_fond(couleur=(255, 255, 255, 255))
 
-            imageforme = Image.new('RGBA', (480, 360), color = (255, 255, 255, 0))
-            global d_forme
-            d_forme = ImageDraw.Draw(imageforme)
+        elif fond["couleur_de_l'arière_plant"]=="3":
+            couleur_du_fond(couleur=(255, 0, 233, 255))
 
-            caractèrelecture = 0
+        elif fond["couleur_de_l'arière_plant"]=="4":
+            couleur_du_fond(couleur=(253, 255, 0, 255))
 
-
-            # Afficher la taille du fichier
-            logging.debug("Taille du fichier : " + str(len(fichier)))
-            logging.debug("contenu du fichier : " + fichier )
-
-            # premier controle du fichier : la longueur
-            if len(fichier)<13:
-                print("Votre fichier contient une taille anormale de caratrères. Il est donc potentiellement corrompu, ou provient d'une vertion différnete de Scratch Draw.")
-                print("Appuiller sur Entrée pour ouvrir ce fichier et Q pour quiter.")
-                réponse_controle_fichier_longueur=input("")
-
-                if réponse_controle_fichier_longueur=="":
-                    print ("Le fichier sera ouver, mais il y a des risque de dysfonctionnement...")
-
-                elif (réponse_controle_fichier_longueur=="q") or (réponse_controle_fichier_longueur=="Q"):
-                    logging.debug("l'ouverture du fichier est anulé en raison de la taille anormal")
-                    annuler_ouverture=True
-            
-            # Elément de fin de fichier       -----------------------
-
-            logging.debug ("fichier[-1] " + fichier[-1])
-            logging.debug ("fichier[-2] " + fichier[-2])
-            logging.debug ("fichier[-3] " + fichier[-3])
-
-            if (fichier[-1] == "0"):
-                logging.debug ("vertion du fichier (0) correcte")
-            
-            elif (fichier[-1] == "1"):
-                logging.debug ("Vertion du fichier (1) correcte")
-                
-            else:
-                print ("Attention : votre fichier a une version différente de celle de ce générateur.")
-                print ("Les vertion suporté sont : v0, v1")
-                print ("La vertion du fichier est : " + fichier[-1])
-
-                print ("Appuiller sur Entée pour continuer et Q pour quitter")
-
-                ouvrir_un_fichier_avec_mauvaise_vertion=input("")
-
-                if ouvrir_un_fichier_avec_mauvaise_vertion == "":
-                    print ("Le fichier sera ouvert, mais il y a des risques de dysfonctionnement...")
-                
-                elif ouvrir_un_fichier_avec_mauvaise_vertion == "Q" or ouvrir_un_fichier_avec_mauvaise_vertion == "q":
-                    annuler_ouverture=True
-
-                else:
-                    print ("commande inconue")
-
-            fond = {"Grille" : bool(int(fichier[-2])), "couleur_de_l'arière_plant" : fichier[-3]}
-
-            logging.debug("contenue dictionaire fond : " + str(fond))
-
-
+        elif fond["couleur_de_l'arière_plant"]=="5":
+            couleur_du_fond(couleur=(255, 144, 0, 255))
         
-            while not (len(fichier) == caractèrelecture + 1):
+        elif fond["couleur_de_l'arière_plant"]=="6":
+            couleur_du_fond(couleur=(255, 0, 0, 255))
+        
+        elif fond["couleur_de_l'arière_plant"]=="7":
+            couleur_du_fond(couleur=(56, 158, 255, 255))
 
-                if annuler_ouverture == True:
-                    print ("Louverture a était anuler, vous pouver ouvrir un nouveau fichier...")
-                    break
-
-                logging.debug("caractère en cours de lecture : " + fichier[caractèrelecture])
-
-                if fichier[caractèrelecture] == "1": # détéction d'un point
-                    caractèrelecture = caractèrelecture + 1
-                    caractèrelecture = point(caractèrelecture)
-
-                    tracer_point()
-
-                    information_sur_point = {"couleur":"0", "coord_x":"0", "coord_y": "0", "taille": "0"} #réinisialisation du dicionaire point
-
-                elif fichier[caractèrelecture] == "2": # détéction d'un cercle
-                    caractèrelecture = caractèrelecture + 1
-
-                    caractèrelecture = cercle(caractèrelecture)
-
-                    tracer_cercle()
-
-                    information_sur_cercle = {"couleur fond":"0", "couleur contour":"0", "coord_x":"0", "coord_y": "0", "taille": "0"} #réinisialisation du dicionaire cercle
-
-                elif fichier[caractèrelecture] == "3": # détéction d'un rectangle
-                    caractèrelecture = caractèrelecture + 1
-
-                    caractèrelecture = rectangle(caractèrelecture)
-
-                    tracer_rectangle()
-
-                    information_sur_rectangle = {"couleur fond":"0", "couleur contour":"0", "coord_x":"0", "coord_y": "0", "taille": "0"} #réinisialisation du dicionaire rectangle
-
-                elif fichier[caractèrelecture] == "4": # détéction d'un triangle
-                    caractèrelecture = caractèrelecture + 1
-
-                    caractèrelecture = triangle(caractèrelecture)
-
-                    tracer_triangle()
-
-                    information_sur_triangle = {"couleur fond":"0", "couleur contour":"0", "coord_x":"0", "coord_y": "0", "taille": "0"} #réinisialisation du dicionaire triangle
-
-                elif fichier[caractèrelecture] == "5": # détéction d'un carré
-                    caractèrelecture = caractèrelecture + 1
-
-                    caractèrelecture = carré(caractèrelecture)
-
-                    tracer_carré()
-
-                    information_sur_carré = {"couleur fond":"0", "couleur contour":"0", "coord_x":"0", "coord_y": "0", "taille": "0"} #réinisialisation du dicionaire carré
-                
-                elif fichier[caractèrelecture] == "6": # fin du fichier
-                    logging.debug("fin du fichier")
-
-                    print("le fichier a étais ouvert avec succé.")
-
-                    varibale_pour_validation=input("Appuiller sur Entrée pour retouvner au menu principal.")
-                    print("")
-
-                    break
-
-                elif fichier[caractèrelecture] == "7": #remplisage
-                    
-                    caractèrelecture = caractèrelecture + 1                    
-                    caractèrelecture = remplisage(caractèrelecture)
-
-                    tracer_remplisage()
-
-                    information_sur_remplisage = {"couleur":"0", "coord_x":"0", "coord_y": "0"}
-
-                    logging.debug("caractèrelecture : " + str(caractèrelecture))
-                    logging.debug("caractère en cours de lecture : " + fichier[caractèrelecture])
-
-                else:      # erreur : arrêt du programme
-                    
-                    print ("Votre fichier contient une erreur majeur (un élément inconue a était détecter)")
-                    print ("Votre fichier est peut-être d'une version plus récente que celle de cette aplication.")
-                    varibale_pour_validation=input("Appuiller sur Entrée pour quiter")
-
-                    break
-
-                
-                caractèrelecture = caractèrelecture + 1
-            
-            # fond de l'image :
-
-            if fond["Grille"]==True:
-                grille()
-
-            if not(fond["couleur_de_l'arière_plant"]=="0"):     # détéction d'un fond non coloré
-                if fond["couleur_de_l'arière_plant"]=="1":
-                    couleur_du_fond(couleur=(0, 0, 0, 255))
-
-                elif fond["couleur_de_l'arière_plant"]=="2":
-                    couleur_du_fond(couleur=(255, 255, 255, 255))
-
-                elif fond["couleur_de_l'arière_plant"]=="3":
-                    couleur_du_fond(couleur=(255, 0, 233, 255))
-
-                elif fond["couleur_de_l'arière_plant"]=="4":
-                    couleur_du_fond(couleur=(253, 255, 0, 255))
-
-                elif fond["couleur_de_l'arière_plant"]=="5":
-                    couleur_du_fond(couleur=(255, 144, 0, 255))
-                
-                elif fond["couleur_de_l'arière_plant"]=="6":
-                    couleur_du_fond(couleur=(255, 0, 0, 255))
-                
-                elif fond["couleur_de_l'arière_plant"]=="7":
-                    couleur_du_fond(couleur=(56, 158, 255, 255))
-
-                elif fond["couleur_de_l'arière_plant"]=="8":
-                    couleur_du_fond(couleur=(255, 144, 210, 255))
-                
-                elif fond["couleur_de_l'arière_plant"]=="9":
-                    couleur_du_fond(couleur=(0, 255, 32, 255))
+        elif fond["couleur_de_l'arière_plant"]=="8":
+            couleur_du_fond(couleur=(255, 144, 210, 255))
+        
+        elif fond["couleur_de_l'arière_plant"]=="9":
+            couleur_du_fond(couleur=(0, 255, 32, 255))
 
 
-            image.paste(imageforme, (0,0), imageforme)      # Fusionner les images
+    image.paste(imageforme, (0,0), imageforme)      # Fusionner les images
 
-            if not(fond["couleur_de_l'arière_plant"]=="0"):
-                image_fond.paste(image, (0,0), image)
-                image_fond = image_fond.transpose(Image.FLIP_TOP_BOTTOM) #invertion de l'image, car l'image est dans le mauvais sens
-                image_fond.save('image_générer.png')
-            
-            image = image.transpose(Image.FLIP_TOP_BOTTOM) #invertion de l'image, car l'image est dans le mauvais sens
-            image.save('image_générer.png')
-            
-            ecriture_menue_principal=True
-
-        #except:
-            #print("erreur")
-            #try:
-            #    print("Une erreur est survenue.")
-            #    print("Vouler vous enregistrer votre image ?")
-            #    print("L'ouverture sera incomplet, mais une partit de l'image pourrait être ouvert.")
-            #    print("appuiller sur Entrée pour enregistrer votre image, et Q pour quiter.")
-            #    variable_pour_comande_erreur=input("")
-            #    if variable_pour_comande_erreur=="Q" or variable_pour_comande_erreur=="q":
-            #        quit()
-            #    elif variable_pour_comande_erreur=="":
-            #        print("Esser de sovegarder votre image...")
-            #        image.save('image_générer.png')
-            #        quit()
-            #    else:
-            #        quit()
-
-            #except:
-            #    print("Erreur majeur")
-            #    sleep(5)
-            #    quit()
+    if not(fond["couleur_de_l'arière_plant"]=="0"):
+        image_fond.paste(image, (0,0), image)
+        image_fond = image_fond.transpose(Image.FLIP_TOP_BOTTOM) #invertion de l'image, car l'image est dans le mauvais sens
+        image_fond.save('image_générer.png')
+    
+    image = image.transpose(Image.FLIP_TOP_BOTTOM) #invertion de l'image, car l'image est dans le mauvais sens
+    image.save('image_générer.png')
+    
+    
 menu_principal()
 
 
