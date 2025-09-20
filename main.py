@@ -27,7 +27,7 @@ J'ai donné l'extension .sdrw à ces fichiers"""
 
 import logging
 logging.basicConfig(level=logging.DEBUG)
-
+from tkinter import *
 from PIL import Image, ImageDraw, Image
 
 #inicialisation des dicionaire pour les information des élément ------------------
@@ -1631,30 +1631,128 @@ annuler_ouverture=False
 ecriture_menue_principal=True
 commande_menu=""
 
-while True: #boucle principale du programme
+# intercafe graphique -----------------------------------------------------------------------------------------------------
 
-    if ecriture_menue_principal==True:
+fermeture_volontaire={"fermeture_ouverture_fichier_choix_d_ouverture":False, "fermeture_ouverture_par_le_press_papier":False}
 
-        annuler_ouverture=False
+fênetre_principal_choix_d_ouverture=None
+def ouverture_fichier_choix_d_ouverture():
+    """Cette fonction crée une fênetre pour choisire comment ouvrir un fichier : coller le fichier ou ouvrir un fichier."""
+    
+    try:
+        fênetre_principal.destroy()
+        logging.debug("fênetre principal fermé")
+    except:
+        logging.debug("Imposible de fermer la fênetre, car elle est déjà fermer.")
+    
 
-        print ("")
-        print ("----  MENU PRINCIPAL  ----")
-        print ("")
+    global fênetre_choix_d_ouverture
+    global fermeture_volontaire
+    fermeture_volontaire["fermeture_ouverture_fichier_choix_d_ouverture"]=False
 
-        print ("Commandes :")
-        print ("   Appuiller sur Entée pour ouvrir un fichier")
-        print ("   Ecriver Q pour quitter")
+    fênetre_choix_d_ouverture = Tk()
+    fênetre_choix_d_ouverture.title("Ouverture d'un fichier")
+    Texte_choix_d_ouverture = Label(fênetre_choix_d_ouverture, text="Comment vouler-vous ouvrir le fichier ?")
+    Texte_choix_d_ouverture.pack()
 
-        commande_menu=input("")
+    choix_d_ouvertre_bouton_ouvrir_en_collan = Button(fênetre_choix_d_ouverture, text="Ouvrir un fichier en le collen avec le presse papier", command=ouverture_par_le_press_papier)
+    choix_d_ouvertre_bouton_ouvrir_en_collan.pack()
 
-        if commande_menu=="":
-            fichier = input("Coller les chiffres de scratch draw : ")
-            ouverture_fichier=True
+    fênetre_choix_d_ouverture.mainloop()
+    if fermeture_volontaire["fermeture_ouverture_fichier_choix_d_ouverture"]==False:     #la fermeture n'est pas volontaire, mais elle a était fait par l'utilisateur
+        menu_principal()
+
+fênetre_ouverture_press_papier=None
+chant_texte_du_fichier=None
+def ouverture_par_le_press_papier():
+    """Cette fonction crée une fênetre avec un chant texte de saisie pour coller le fichier à ouvrire."""
+    global fermeture_volontaire
+    fermeture_volontaire["fermeture_ouverture_fichier_choix_d_ouverture"]=True
+    fermeture_volontaire["fermeture_ouverture_par_le_press_papier"]=False
+    
+    fênetre_choix_d_ouverture.destroy()
+    global fênetre_ouverture_press_papier
+
+    fênetre_ouverture_press_papier = Tk()
+    fênetre_ouverture_press_papier.title("Ouverture d'un fichier par le press papier")
+
+    texte_ouverture_par_le_press_papier = Label(fênetre_ouverture_press_papier, text="Copier et coller votre fichier.")
+    texte_ouverture_par_le_press_papier.pack()
+
+    global chant_texte_du_fichier
+
+    chant_texte_du_fichier = Entry(fênetre_ouverture_press_papier, width=250)
+    chant_texte_du_fichier.pack()
+
+    fênetre_ouverture_press_papier_boutton_valider=Button(fênetre_ouverture_press_papier, text="Valider", command=valider_chan_texte_ouverture)
+    fênetre_ouverture_press_papier_boutton_valider.pack()
+
+    #annuler_press_papier=Button(fênetre_ouverture_press_papier, text="Annuler", command=fênetre_ouverture_press_papier.destroy())
+
+    fênetre_ouverture_press_papier.mainloop()
+    
+    logging.debug("la mainloop de press papier est arrêter")
+    if fermeture_volontaire["fermeture_ouverture_par_le_press_papier"]==False:
+        ouverture_fichier_choix_d_ouverture()
+
+chant_texte_temporaire=None
+
+def valider_chan_texte_ouverture():
+    """Cette fonction est apeller losque le chant texte d'ouverture de fichier est valide"""
+    global fermeture_volontaire
+    fermeture_volontaire["fermeture_ouverture_par_le_press_papier"]=True
+    global chant_texte_du_fichier
+    global chant_texte_temporaire
+    chant_texte_temporaire=chant_texte_du_fichier.get()
+
+    fênetre_ouverture_press_papier.destroy()
+
+    
+
+# fin intercafe graphique -----------------------------------------------------------------------------------------------------
+
+fênetre_principal=None
+d=None
+d_forme=None
+image=None
+
+fichier=None
+def menu_principal():
+    global fênetre_principal
+    fênetre_principal = Tk()
+    fênetre_principal.title("Export PNG Scratch Draw")
+    Texte_menu_principal = Label(fênetre_principal, text="Bienvenu")
+    Texte_menu_principal.pack()
+
+    menu_principal_bouton_ouverture_fichier_simple = Button(fênetre_principal, text="Ouvrir et exporter un fichier", command=ouverture_fichier_choix_d_ouverture)
+    menu_principal_bouton_ouverture_fichier_simple.pack()
+
+    fênetre_principal.mainloop()
+
+    #AVANT LA FËNETRE ------------------------------------
+    #if ecriture_menue_principal==True:
+
+    #    annuler_ouverture=False
+
+    #    print ("")
+    #    print ("----  MENU PRINCIPAL  ----")
+    #    print ("")
+
+    #    print ("Commandes :")
+    #    print ("   Appuiller sur Entée pour ouvrir un fichier")
+    #    print ("   Ecriver Q pour quitter")
+
+    #    commande_menu=input("")
+
+    #    if commande_menu=="":
+    #        fichier = input("Coller les chiffres de scratch draw : ")
+    #        ouverture_fichier=True
         
-        elif commande_menu=="Q" or commande_menu=="q":
-            break
+    #    elif commande_menu=="Q" or commande_menu=="q":
+    #        break
 
-        ecriture_menue_principal=False
+    #    ecriture_menue_principal=False
+    #--------------------------------------------------
 
         
 
@@ -1663,10 +1761,14 @@ while True: #boucle principale du programme
         #try:
             ouverture_fichier=False
 
+            global image
             image = Image.new('RGBA', (480, 360), color = (255, 255, 255, 0))
+            
+            global d
             d = ImageDraw.Draw(image)
 
             imageforme = Image.new('RGBA', (480, 360), color = (255, 255, 255, 0))
+            global d_forme
             d_forme = ImageDraw.Draw(imageforme)
 
             caractèrelecture = 0
@@ -1877,5 +1979,7 @@ while True: #boucle principale du programme
             #    print("Erreur majeur")
             #    sleep(5)
             #    quit()
+menu_principal()
+
 
 logging.debug("fin programme")
