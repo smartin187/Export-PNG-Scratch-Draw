@@ -1738,16 +1738,16 @@ def ouverture_terminé():
     texte_ouverture_terminer.pack()
 
     bouton_ouverture_terminer_enregistrer=Button(ouverture_terminer_fênetre, text="Enregistrer l'image", command=enregistrer_l_image_fênetre)
-    bouton_ouverture_terminer_enregistrer.pack
+    bouton_ouverture_terminer_enregistrer.pack()
     
-    bouton_ouverture_terminer_quitter=Button(ouverture_terminer_fênetre, text="Quitter", command=enregistrer_l_image_fênetre)
-    bouton_ouverture_terminer_quitter.pack
+    bouton_ouverture_terminer_quitter=Button(ouverture_terminer_fênetre, text="Quitter", command=ouverture_terminer_fênetre.destroy)
+    bouton_ouverture_terminer_quitter.pack()
 
     ouverture_terminer_fênetre.mainloop()
 
 
 def enregistrer_l_image_fênetre():
-    logging.debug("")
+    logging.debug("coucou")
 
 fênetre_principal=None
 d=None
