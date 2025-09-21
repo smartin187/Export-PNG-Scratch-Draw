@@ -1719,7 +1719,7 @@ def fênetre_ouverture_en_cours():
     global fichier
     fichier=chant_texte_temporaire
 
-    fênetre_ouverture_en_cours_barre_de_progresion.after(1, ouverture_fichier_principal)
+    fênetre_ouverture_en_cours_barre_de_progresion.after(0, ouverture_fichier_principal)
 
     fênetre_ouverture_en_cours_barre_de_progresion.mainloop()
 
@@ -1756,7 +1756,7 @@ def ouverture_fichier_principal():
     global information_sur_rectangle
     global information_sur_remplisage
     global information_sur_triangle
-    
+    global fênetre_ouverture_en_cours_barre_de_progresion
             
     global image
     image = Image.new('RGBA', (480, 360), color = (255, 255, 255, 0))
@@ -1877,12 +1877,9 @@ def ouverture_fichier_principal():
             information_sur_carré = {"couleur fond":"0", "couleur contour":"0", "coord_x":"0", "coord_y": "0", "taille": "0"} #réinisialisation du dicionaire carré
         
         elif fichier[caractèrelecture] == "6": # fin du fichier
+            
+            fênetre_ouverture_en_cours_barre_de_progresion.destroy()
             logging.debug("fin du fichier")
-
-            print("le fichier a étais ouvert avec succé.")
-
-            varibale_pour_validation=input("Appuiller sur Entrée pour retouvner au menu principal.")
-            print("")
 
             break
 
