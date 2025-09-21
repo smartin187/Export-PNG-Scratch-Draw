@@ -1721,8 +1721,33 @@ def fênetre_ouverture_en_cours():
 
     fênetre_ouverture_en_cours_barre_de_progresion.after(0, ouverture_fichier_principal)
 
+    fênetre_ouverture_en_cours_barre_de_progresion.protocol("WM_DELETE_WINDOW", lambda: None)
+
     fênetre_ouverture_en_cours_barre_de_progresion.mainloop()
 
+    logging.debug("mainloop de ouverture en cours terminer")
+
+    fin_de_fichier()
+
+def ouverture_terminé():
+    ouverture_terminer_fênetre=Tk()
+
+    ouverture_terminer_fênetre.title("Ouverture terminer")
+
+    texte_ouverture_terminer=Label(ouverture_terminer_fênetre, text="L'ouverture est terminer. Vous pouver enregistrer votre image")
+    texte_ouverture_terminer.pack()
+
+    bouton_ouverture_terminer_enregistrer=Button(ouverture_terminer_fênetre, text="Enregistrer l'image", command=enregistrer_l_image_fênetre)
+    bouton_ouverture_terminer_enregistrer.pack
+    
+    bouton_ouverture_terminer_quitter=Button(ouverture_terminer_fênetre, text="Quitter", command=enregistrer_l_image_fênetre)
+    bouton_ouverture_terminer_quitter.pack
+
+    ouverture_terminer_fênetre.mainloop()
+
+
+def enregistrer_l_image_fênetre():
+    logging.debug("")
 
 fênetre_principal=None
 d=None
@@ -1745,6 +1770,9 @@ def menu_principal():
 
 # fin intercafe graphique -----------------------------------------------------------------------------------------------------
 
+fond=None
+imageforme=None
+
 def ouverture_fichier_principal():        
     """Cette fonction gère l'ouverture d'un fichier. Elle utilise d'autre fonction pour analiser plus précisément les élément et pour tracer les élément."""
     
@@ -1757,8 +1785,10 @@ def ouverture_fichier_principal():
     global information_sur_remplisage
     global information_sur_triangle
     global fênetre_ouverture_en_cours_barre_de_progresion
-            
+    global fond
     global image
+    global imageforme
+
     image = Image.new('RGBA', (480, 360), color = (255, 255, 255, 0))
             
     global d
@@ -1879,8 +1909,6 @@ def ouverture_fichier_principal():
         elif fichier[caractèrelecture] == "6": # fin du fichier
             
             fênetre_ouverture_en_cours_barre_de_progresion.destroy()
-            logging.debug("fin du fichier")
-
             break
 
         elif fichier[caractèrelecture] == "7": #remplisage
@@ -1906,7 +1934,10 @@ def ouverture_fichier_principal():
         
         caractèrelecture = caractèrelecture + 1
     
+
+def fin_de_fichier():
     # fond de l'image :
+
 
     if fond["Grille"]==True:
         grille()
@@ -1939,6 +1970,10 @@ def ouverture_fichier_principal():
         elif fond["couleur_de_l'arière_plant"]=="9":
             couleur_du_fond(couleur=(0, 255, 32, 255))
 
+    global fênetre_ouverture_en_cours_barre_de_progresion
+    
+    ouverture_terminé()
+    global image
 
     image.paste(imageforme, (0,0), imageforme)      # Fusionner les images
 
