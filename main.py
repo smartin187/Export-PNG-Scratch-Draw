@@ -26,8 +26,10 @@ Un exemple d'un tel fichier image est :
 J'ai donné l'extension .sdrw à ces fichiers"""
 
 import logging
+from tkinter import filedialog
 logging.basicConfig(level=logging.DEBUG)
 from tkinter import *
+
 from PIL import Image, ImageDraw, Image
 
 #inicialisation des dicionaire pour les information des élément ------------------
@@ -1719,17 +1721,26 @@ def fênetre_ouverture_en_cours():
     global fichier
     fichier=chant_texte_temporaire
 
-    fênetre_ouverture_en_cours_barre_de_progresion.after(0, ouverture_fichier_principal)
+    fênetre_ouverture_en_cours_barre_de_progresion.after(500, ouverture_fichier_principal)          # attention : ne pas mettre un temps trop faible : la fênetre n'a pas le temps d'être correctement crée. 500 ms, c'est bon
 
     fênetre_ouverture_en_cours_barre_de_progresion.protocol("WM_DELETE_WINDOW", lambda: None)
 
     fênetre_ouverture_en_cours_barre_de_progresion.mainloop()
 
     logging.debug("mainloop de ouverture en cours terminer")
-
     fin_de_fichier()
 
+ouverture_terminer_fênetre=None
+
 def ouverture_terminé():
+    """fênetre qui s'ouvre quand l'ouverture est terminer. Posibilité : quitter ou enregistrer"""
+    def quitter_ouverture_terminé():
+        """Fonction pour quitter la fênetre"""
+        global ouverture_terminer_fênetre
+        ouverture_terminer_fênetre.destroy()
+        menu_principal()
+
+    global ouverture_terminer_fênetre
     ouverture_terminer_fênetre=Tk()
 
     ouverture_terminer_fênetre.title("Ouverture terminer")
@@ -1740,14 +1751,23 @@ def ouverture_terminé():
     bouton_ouverture_terminer_enregistrer=Button(ouverture_terminer_fênetre, text="Enregistrer l'image", command=enregistrer_l_image_fênetre)
     bouton_ouverture_terminer_enregistrer.pack()
     
-    bouton_ouverture_terminer_quitter=Button(ouverture_terminer_fênetre, text="Quitter", command=ouverture_terminer_fênetre.destroy)
+    bouton_ouverture_terminer_quitter=Button(ouverture_terminer_fênetre, text="Quitter", command=quitter_ouverture_terminé)
     bouton_ouverture_terminer_quitter.pack()
 
     ouverture_terminer_fênetre.mainloop()
 
+chemain_d_accer_fichier_enregistrer=None
 
 def enregistrer_l_image_fênetre():
-    logging.debug("coucou")
+    global chemain_d_accer_fichier_enregistrer
+    chemain_d_accer_fichier_enregistrer=filedialog.asksaveasfilename(
+        defaultextension=".png",
+        filetypes=[("PNG files", "*.png"), ("All files", "*.*")],
+        title="Enregistrer l'image"
+    )
+    ouverture_terminer_fênetre.destroy()
+    
+
 
 fênetre_principal=None
 d=None
@@ -1980,10 +2000,10 @@ def fin_de_fichier():
     if not(fond["couleur_de_l'arière_plant"]=="0"):
         image_fond.paste(image, (0,0), image)
         image_fond = image_fond.transpose(Image.FLIP_TOP_BOTTOM) #invertion de l'image, car l'image est dans le mauvais sens
-        image_fond.save('image_générer.png')
+        image_fond.save(chemain_d_accer_fichier_enregistrer)
     
     image = image.transpose(Image.FLIP_TOP_BOTTOM) #invertion de l'image, car l'image est dans le mauvais sens
-    image.save('image_générer.png')
+    image.save(chemain_d_accer_fichier_enregistrer)
     
     
 menu_principal()
