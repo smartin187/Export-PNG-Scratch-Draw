@@ -1485,7 +1485,7 @@ def tracer_remplisage():
     elif information_sur_remplisage["couleur"]=="16":
         couleur_temporaire_contour=transparence
 
-    ImageDraw.floodfill(image, (int(information_sur_remplisage["coord_x"]), int(information_sur_remplisage["coord_y"])), couleur_temporaire_contour, thresh=0)
+    ImageDraw.floodfill(image_point, (int(information_sur_remplisage["coord_x"]), int(information_sur_remplisage["coord_y"])), couleur_temporaire_contour, thresh=0)
 
 def remplisage(caractèrelecture: int):
     """permet d'analyser le fichier pour un remplisage. met toutes les donné dans le dictionaire information sur remplisage
@@ -1762,17 +1762,19 @@ def enregistrer_l_image_fênetre():
     global chemain_d_accer_fichier_enregistrer
     chemain_d_accer_fichier_enregistrer=filedialog.asksaveasfilename(
         defaultextension=".png",
-        filetypes=[("PNG files", "*.png"), ("All files", "*.*")],
+        filetypes=[("PNG files", "*.png")],
         title="Enregistrer l'image"
     )
     ouverture_terminer_fênetre.destroy()
+    if chemain_d_accer_fichier_enregistrer=="":
+        ouverture_terminé()
     
 
 
 fênetre_principal=None
 d=None
 d_forme=None
-image=None
+image_point=None
 
 fichier=None
 def menu_principal():
@@ -1806,13 +1808,13 @@ def ouverture_fichier_principal():
     global information_sur_triangle
     global fênetre_ouverture_en_cours_barre_de_progresion
     global fond
-    global image
+    global image_point
     global imageforme
 
-    image = Image.new('RGBA', (480, 360), color = (255, 255, 255, 0))
+    image_point = Image.new('RGBA', (480, 360), color = (255, 255, 255, 0))
             
     global d
-    d = ImageDraw.Draw(image)
+    d = ImageDraw.Draw(image_point)
 
     imageforme = Image.new('RGBA', (480, 360), color = (255, 255, 255, 0))
     global d_forme
@@ -1993,17 +1995,19 @@ def fin_de_fichier():
     global fênetre_ouverture_en_cours_barre_de_progresion
     
     ouverture_terminé()
-    global image
+    global image_point
 
-    image.paste(imageforme, (0,0), imageforme)      # Fusionner les images
+    image_point.paste(imageforme, (0,0), imageforme)      # Fusionner les images
 
     if not(fond["couleur_de_l'arière_plant"]=="0"):
-        image_fond.paste(image, (0,0), image)
+        image_fond.paste(image_point, (0,0), image_point)
         image_fond = image_fond.transpose(Image.FLIP_TOP_BOTTOM) #invertion de l'image, car l'image est dans le mauvais sens
         image_fond.save(chemain_d_accer_fichier_enregistrer)
     
-    image = image.transpose(Image.FLIP_TOP_BOTTOM) #invertion de l'image, car l'image est dans le mauvais sens
-    image.save(chemain_d_accer_fichier_enregistrer)
+    image_point = image_point.transpose(Image.FLIP_TOP_BOTTOM) #invertion de l'image, car l'image est dans le mauvais sens
+    image_point.save(chemain_d_accer_fichier_enregistrer)
+
+    menu_principal()
     
     
 menu_principal()
