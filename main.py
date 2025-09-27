@@ -1,6 +1,13 @@
-""" Je génère des fichiers image grâce à Scratch
- Voici la structure d'un fichier image
- j'ai défini des types de forme
+"""
+Ce module est le module principal de cette aplication.
+
+Ce module contient :
+- L'interface utilisateur
+- Les fonction permettant d'analiser le fichier
+- Les fonction permettant de générer l'image a l'aide des fonction d'analise
+
+La structure d'un fichier Scratch Draw :
+Plusieur formes :
  1 : un point
  2 : un cercle
  3 : un rectangle
@@ -23,7 +30,8 @@ Le fichier doit avoir tout son contenu sur une seule ligne
 
 Un exemple d'un tel fichier image est :
 1213340032032896000
-J'ai donné l'extension .sdrw à ces fichiers"""
+J'ai donné l'extension .sdrw à ces fichiers
+"""
 
 import logging
 from tkinter import filedialog
