@@ -1764,6 +1764,8 @@ def ouverture_terminé():
     bouton_ouverture_terminer_quitter=Button(ouverture_terminer_fênetre, text="Quitter", command=quitter_ouverture_terminé)
     bouton_ouverture_terminer_quitter.pack()
 
+    ouverture_terminer_fênetre.protocol("WM_DELETE_WINDOW", quitter_ouverture_terminé)
+
     ouverture_terminer_fênetre.mainloop()
 
 chemain_d_accer_fichier_enregistrer=None
@@ -1805,12 +1807,20 @@ def enregistrement_réussit():
 
     texte_fênetre_enregistrement_réussit_fênetre=Label(fênetre_enregistrement_réussit_fênetre, text="L'enregistrement a étais effectuer avec succés.")
     texte_fênetre_enregistrement_réussit_fênetre.pack()
+    
+    cadre_ouverture=LabelFrame(fênetre_enregistrement_réussit_fênetre, text="Ouvrir...",)
+    cadre_ouverture.pack()
 
-    afficher_dans_explorateur_fichier_fênetre_enregistrement_réussit_fênetre=Button(fênetre_enregistrement_réussit_fênetre, text="Afficher dans l'explorateur de fichier", command=ouvrir_dans_explorateur)
+    afficher_dans_explorateur_fichier_fênetre_enregistrement_réussit_fênetre=Button(cadre_ouverture, text="Afficher dans l'explorateur de fichier", command=ouvrir_dans_explorateur)
     afficher_dans_explorateur_fichier_fênetre_enregistrement_réussit_fênetre.pack()
+
+    ouvrir_l_image=Button(cadre_ouverture, text="Ouvrir l'image", command=image_pour_afficher.show)
+    ouvrir_l_image.pack()
 
     retour_menue_principal_fênetre_enregistrement_réussit_fênetre=Button(fênetre_enregistrement_réussit_fênetre, text="Retourner au menu principal", command=retour_menu_principal)
     retour_menue_principal_fênetre_enregistrement_réussit_fênetre.pack()
+
+    fênetre_enregistrement_réussit_fênetre.protocol("WM_DELETE_WINDOW", retour_menu_principal)
 
     fênetre_enregistrement_réussit_fênetre.mainloop()
 
@@ -2002,6 +2012,7 @@ def ouverture_fichier_principal():
         
         caractèrelecture = caractèrelecture + 1
     
+image_pour_afficher=None
 
 def fin_de_fichier():
     # fond de l'image :
@@ -2052,6 +2063,9 @@ def fin_de_fichier():
     
     image_point = image_point.transpose(Image.FLIP_TOP_BOTTOM) #invertion de l'image, car l'image est dans le mauvais sens
     image_point.save(chemain_d_accer_fichier_enregistrer)
+    
+    global image_pour_afficher
+    image_pour_afficher = Image.open(chemain_d_accer_fichier_enregistrer)
 
     enregistrement_réussit()
     
