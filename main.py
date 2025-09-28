@@ -37,8 +37,10 @@ import logging
 from tkinter import filedialog
 logging.basicConfig(level=logging.DEBUG)
 from tkinter import *
-
 from PIL import Image, ImageDraw, Image
+import os
+import platform
+import subprocess
 
 #inicialisation des dicionaire pour les information des élément ------------------
 information_sur_point = {"couleur":"0", "coord_x":"0", "coord_y": "0", "taille": "0"}
@@ -1029,8 +1031,8 @@ def triangle(caractèrelecture: int):
         caractèrelecture = caractèrelecture + 1
         information_sur_triangle["couleur contour"] += fichier[caractèrelecture]
     else:
-        #raise Exception("erreur de structure pour le triangle, pour la couleur du contour")
-        print("erreur de structure pour le triangle, pour la couleur du contour")
+        #raise Exception("erreur de structure pour le triangle, pour la couleur du contoure")
+        print("erreur de structure pour le triangle, pour la couleur du contoure")
         varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
         annuler_ouverture=True
         return caractèrelecture
@@ -1777,7 +1779,40 @@ def enregistrer_l_image_fênetre():
     if chemain_d_accer_fichier_enregistrer=="":
         ouverture_terminé()
     
+def enregistrement_réussit():
+    def retour_menu_principal():
+        fênetre_enregistrement_réussit_fênetre.destroy()
+        menu_principal()
+    
+    def ouvrir_dans_explorateur():
+        # Obtenir le chemin absolu du fichier
+        chemin_absolu = os.path.abspath(chemain_d_accer_fichier_enregistrer)
+        # Détecter le système d'exploitation et utiliser la commande appropriée
+        systeme = platform.system()
+        try:
+            if systeme == "Windows":
+                # Utiliser le paramètre /select pour sélectionner le fichier dans l'explorateur
+                subprocess.Popen(f'explorer /select,"{chemin_absolu}"')
+            elif systeme == "Darwin":  # MacOS
+                subprocess.Popen(["open", "-R", chemin_absolu])
+            elif systeme == "Linux":
+                subprocess.Popen(["xdg-open", os.path.dirname(chemin_absolu)])
+        except Exception as e:
+            logging.error(f"Erreur lors de l'ouverture de l'explorateur: {str(e)}")
+    
+    fênetre_enregistrement_réussit_fênetre=Tk()
+    fênetre_enregistrement_réussit_fênetre.title("L'enregistrement terminer")
 
+    texte_fênetre_enregistrement_réussit_fênetre=Label(fênetre_enregistrement_réussit_fênetre, text="L'enregistrement a étais effectuer avec succés.")
+    texte_fênetre_enregistrement_réussit_fênetre.pack()
+
+    afficher_dans_explorateur_fichier_fênetre_enregistrement_réussit_fênetre=Button(fênetre_enregistrement_réussit_fênetre, text="Afficher dans l'explorateur de fichier", command=ouvrir_dans_explorateur)
+    afficher_dans_explorateur_fichier_fênetre_enregistrement_réussit_fênetre.pack()
+
+    retour_menue_principal_fênetre_enregistrement_réussit_fênetre=Button(fênetre_enregistrement_réussit_fênetre, text="Retourner au menu principal", command=retour_menu_principal)
+    retour_menue_principal_fênetre_enregistrement_réussit_fênetre.pack()
+
+    fênetre_enregistrement_réussit_fênetre.mainloop()
 
 fênetre_principal=None
 d=None
@@ -1795,6 +1830,9 @@ def menu_principal():
 
     menu_principal_bouton_ouverture_fichier_simple = Button(fênetre_principal, text="Ouvrir et exporter un fichier", command=ouverture_fichier_choix_d_ouverture)
     menu_principal_bouton_ouverture_fichier_simple.pack()
+
+    menu_principal_bouton_quitter = Button(fênetre_principal, text="Quitter", command=fênetre_principal.destroy)
+    menu_principal_bouton_quitter.pack()
 
     fênetre_principal.mainloop()
 
@@ -2015,7 +2053,7 @@ def fin_de_fichier():
     image_point = image_point.transpose(Image.FLIP_TOP_BOTTOM) #invertion de l'image, car l'image est dans le mauvais sens
     image_point.save(chemain_d_accer_fichier_enregistrer)
 
-    menu_principal()
+    enregistrement_réussit()
     
     
 menu_principal()
