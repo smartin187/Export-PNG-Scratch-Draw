@@ -41,39 +41,9 @@ from PIL import Image, ImageDraw, Image
 import os
 import platform
 import subprocess
+from couleur_scrach_draw import *
+from infocmation_sur_élément import *
 
-#inicialisation des dicionaire pour les information des élément ------------------
-information_sur_point = {"couleur":"0", "coord_x":"0", "coord_y": "0", "taille": "0"}
-
-information_sur_cercle = {"couleur fond":"0", "couleur contour":"0", "coord_x":"0", "coord_y": "0", "taille": "0"}
-
-information_sur_rectangle = {"couleur fond":"0", "couleur contour":"0", "coord_x":"0", "coord_y": "0", "taille": "0"}
-
-information_sur_triangle = {"couleur fond":"0", "couleur contour":"0", "coord_x":"0", "coord_y": "0", "taille": "0"}
-
-information_sur_carré = {"couleur fond":"0", "couleur contour":"0", "coord_x":"0", "coord_y": "0", "taille": "0"}
-
-information_sur_remplisage = {"couleur":"0", "coord_x":"0", "coord_y": "0"}
-
-#inicialisation des couleurs :
-baige=(255, 205, 127, 255)
-jaune=(255, 247, 0, 255)
-marron=(150, 84, 38, 255)
-vert_clair=(143, 255, 139, 255)
-vert_foncé=(5, 158, 0, 255)
-bleu_clair=(127, 192, 255, 255)
-bleu_foncé=(0, 69, 255, 255)
-orange=(255, 125, 0, 255)
-blanc=(255, 255, 255, 255)
-girs_clair=(128, 128, 128, 255)
-rose=(255, 165, 236, 255)
-violet=(230, 0, 163, 255)
-rouge=(255, 0, 0, 255)
-noir=(0, 0, 0, 255)
-gris_foncé=(82, 82, 82, 255)
-transparence=(0, 0, 0, 0)
-
-#fin inicialisation --------------------
 
 caractèrelecture = 0
 
