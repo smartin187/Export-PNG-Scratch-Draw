@@ -32,18 +32,21 @@ Un exemple d'un tel fichier image est :
 1213340032032896000
 J'ai donné l'extension .sdrw à ces fichiers
 """
+# import
 
 import logging
 from tkinter import filedialog
-logging.basicConfig(level=logging.DEBUG)
 from tkinter import *
 from PIL import Image, ImageDraw, Image
 import os
 import platform
 import subprocess
+
 from couleur_scrach_draw import *
 from infocmation_sur_élément import *
 
+
+logging.basicConfig(level=logging.DEBUG)
 
 caractèrelecture = 0
 
@@ -258,7 +261,7 @@ def point(caractèrelecture: int):
 # fonction pour le cercle :--------------------------------------------------------------------------------------
 
 def tracer_cercle():
-    """permet de tracer le cercle avec le dicionaire infocmation_sur_cercle"""
+    """permet de tracer le cercle avec le dictionnaire infocmation_sur_cercle"""
 
     logging.debug("entrer dans la fonction tracer_cercle")
 
@@ -542,7 +545,7 @@ def cercle (caractèrelecture: int):
 # fonction pour le recrtangle :     --------------------------------------------------------------------------------------
 
 def tracer_rectangle():
-    """permet de tracer le rectangle avec le dicionaire infocmation_sur_rectangle"""
+    """permet de tracer le rectangle avec le dictionnaire infocmation_sur_rectangle"""
 
     #   couleur de la forme :
     #      1. fond
@@ -832,7 +835,7 @@ def rectangle(caractèrelecture: int):
     return caractèrelecture
 
 def tracer_triangle():
-    """permet de tracer le triangle avec le dicionaire infocmation_sur_triangle"""
+    """permet de tracer le triangle avec le dicionnaire infocmation_sur_triangle"""
 
     logging.debug("rentré dans la fonction cracer_triangle")
 
@@ -1413,7 +1416,7 @@ def carré(caractèrelecture: int):
 
 
 def tracer_remplisage():
-    """permet de tracer le remplisage avec le dicionaire information sur remplisage"""          # ajouter la couleur
+    """permet de tracer le remplisage avec le dicionnaire information sur remplisage"""          # ajouter la couleur
     logging.debug("rentrer dans la fonction tracer_remplisage")
 
     if information_sur_remplisage["couleur"]=="1":
@@ -1644,6 +1647,15 @@ fênetre_ouverture_press_papier=None
 chant_texte_du_fichier=None
 def ouverture_par_le_press_papier():
     """Cette fonction crée une fênetre avec un chant texte de saisie pour coller le fichier à ouvrire."""
+    
+    def Controle_chant_texte(*args):
+        """Cette fonction est appelée à chaque modification du texte"""
+        contenu = texte_variable.get()
+        if contenu and not contenu.isdigit():
+            texte_erreur_fichier.config(text="Votre fichier est incorecte. L'ouverture risque d'échouer...")
+        else:
+            texte_erreur_fichier.config(text="")
+
     global fermeture_volontaire
     fermeture_volontaire["fermeture_ouverture_fichier_choix_d_ouverture"]=True
     fermeture_volontaire["fermeture_ouverture_par_le_press_papier"]=False
@@ -1656,10 +1668,15 @@ def ouverture_par_le_press_papier():
 
     texte_ouverture_par_le_press_papier = Label(fênetre_ouverture_press_papier, text="Copier et coller votre fichier.")
     texte_ouverture_par_le_press_papier.pack()
+    
+    texte_erreur_fichier = Label(fênetre_ouverture_press_papier, text="", fg="red")
+    texte_erreur_fichier.pack()
 
     global chant_texte_du_fichier
-
-    chant_texte_du_fichier = Entry(fênetre_ouverture_press_papier, width=250)
+    texte_variable = StringVar()
+    texte_variable.trace_add("write", Controle_chant_texte)  # Attache la fonction au changement de texte
+    
+    chant_texte_du_fichier = Entry(fênetre_ouverture_press_papier, width=250, textvariable=texte_variable)
     chant_texte_du_fichier.pack()
 
     fênetre_ouverture_press_papier_boutton_valider=Button(fênetre_ouverture_press_papier, text="Valider", command=valider_chan_texte_ouverture)

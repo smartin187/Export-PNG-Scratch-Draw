@@ -25,7 +25,7 @@ Vérifiez si ces librairies sont bien installées sur votre ordinateur. Si cela 
 
 ## Paramétrage du log
 
-Ce programme a un log permettant d'aider la correction de bug. Si vous n'avez pas besoin du log, vous pouvez, à la ligne 38, changer le niveau du log :
+Ce programme a un log permettant d'aider la correction de bug. Si vous n'avez pas besoin du log, vous pouvez, à la ligne 49, changer le niveau du log :
 ```python
 logging.basicConfig(level=logging.DEBUG)
 ```
