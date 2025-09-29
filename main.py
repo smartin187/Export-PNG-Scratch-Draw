@@ -1656,6 +1656,17 @@ def ouverture_par_le_press_papier():
         else:
             texte_erreur_fichier.config(text="")
 
+    def fonction_coller_le_contenu_du_press_papier():
+        """cette fonction permet de coller le contenu du press papier dans la saisie de texte."""
+        #fênetre_ouverture_press_papier.withdraw()
+        chant_texte_du_fichier.delete(0, END)
+        
+        press_papier=fênetre_ouverture_press_papier.clipboard_get()
+        logging.debug("press_papier : " + press_papier)
+        
+        chant_texte_du_fichier.insert(0, press_papier)
+               
+
     global fermeture_volontaire
     fermeture_volontaire["fermeture_ouverture_fichier_choix_d_ouverture"]=True
     fermeture_volontaire["fermeture_ouverture_par_le_press_papier"]=False
@@ -1669,16 +1680,22 @@ def ouverture_par_le_press_papier():
     texte_ouverture_par_le_press_papier = Label(fênetre_ouverture_press_papier, text="Copier et coller votre fichier.")
     texte_ouverture_par_le_press_papier.pack()
     
-    texte_erreur_fichier = Label(fênetre_ouverture_press_papier, text="", fg="red")
+    cadre_fichier=LabelFrame(fênetre_ouverture_press_papier, text="")
+
+    texte_erreur_fichier = Label(cadre_fichier, text="", fg="red")
     texte_erreur_fichier.pack()
 
     global chant_texte_du_fichier
     texte_variable = StringVar()
     texte_variable.trace_add("write", Controle_chant_texte)  # Attache la fonction au changement de texte
     
-    chant_texte_du_fichier = Entry(fênetre_ouverture_press_papier, width=250, textvariable=texte_variable)
+    chant_texte_du_fichier = Entry(cadre_fichier, width=250, textvariable=texte_variable)
     chant_texte_du_fichier.pack()
+    cadre_fichier.pack()
 
+    boutton_coller_le_press_papier=Button(fênetre_ouverture_press_papier, text="Coller le contenu du presse papier", command=fonction_coller_le_contenu_du_press_papier)            # a terminer
+    boutton_coller_le_press_papier.pack()
+    
     fênetre_ouverture_press_papier_boutton_valider=Button(fênetre_ouverture_press_papier, text="Valider", command=valider_chan_texte_ouverture)
     fênetre_ouverture_press_papier_boutton_valider.pack()
 
