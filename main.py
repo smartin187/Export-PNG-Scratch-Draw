@@ -37,6 +37,8 @@ J'ai donné l'extension .sdrw à ces fichiers
 import logging
 from tkinter import filedialog
 from tkinter import *
+from tkinter import ttk
+
 from PIL import Image, ImageDraw, Image
 import os
 import platform
@@ -1722,15 +1724,22 @@ def valider_chan_texte_ouverture():
     fênetre_ouverture_en_cours()
 
 fênetre_ouverture_en_cours_barre_de_progresion=None
+pourcentage_ouverture=None
 
 def fênetre_ouverture_en_cours():
     global chant_texte_temporaire
     global fênetre_ouverture_en_cours_barre_de_progresion
     fênetre_ouverture_en_cours_barre_de_progresion=Tk()
     fênetre_ouverture_en_cours_barre_de_progresion.title("Ouverture en cours...")
-
+    
     texte_ouverture_en_cours=Label(fênetre_ouverture_en_cours_barre_de_progresion, text="L'ouverture est en cours, merci de patienter...")
     texte_ouverture_en_cours.pack()
+    
+    # barre de progression
+    global pourcentage_ouverture
+    pourcentage_ouverture = IntVar(value=0)
+    barre_de_progression=ttk.Progressbar(fênetre_ouverture_en_cours_barre_de_progresion, orient="horizontal", length=300, mode="determinate", variable=pourcentage_ouverture, maximum=100)
+    barre_de_progression.pack()
     
     global fichier
     fichier=chant_texte_temporaire
@@ -2012,10 +2021,11 @@ def ouverture_fichier_principal():
             varibale_pour_validation=input("Appuiller sur Entrée pour quiter")
 
             break
-
         
         caractèrelecture = caractèrelecture + 1
-    
+        pourcentage_ouverture.set(caractèrelecture/len(fichier)*100)
+        fênetre_ouverture_en_cours_barre_de_progresion.update()
+        
 image_pour_afficher=None
 
 def fin_de_fichier():
