@@ -1885,16 +1885,23 @@ image_point=None
 fichier=None
 def menu_principal():
     """Fenetre graphique du menu principal."""
+    def quitter_menu():
+        """pemret de quitter le menu"""
+        fênetre_principal.destroy()
+        quit()
+    
+    
     global fênetre_principal
     fênetre_principal = Tk()
     fênetre_principal.title("Export PNG Scratch Draw")
     Texte_menu_principal = Label(fênetre_principal, text="Bienvenu")
     Texte_menu_principal.pack()
+    fênetre_principal.protocol("WM_DELETE_WINDOW", quitter_menu)
 
     menu_principal_bouton_ouverture_fichier_simple = Button(fênetre_principal, text="Ouvrir et exporter un fichier", command=ouverture_fichier_choix_d_ouverture)
     menu_principal_bouton_ouverture_fichier_simple.pack()
 
-    menu_principal_bouton_quitter = Button(fênetre_principal, text="Quitter", command=fênetre_principal.destroy)
+    menu_principal_bouton_quitter = Button(fênetre_principal, text="Quitter", command=quitter_menu)
     menu_principal_bouton_quitter.pack()
 
     fênetre_principal.mainloop()
