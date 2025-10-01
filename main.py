@@ -1638,12 +1638,50 @@ def ouverture_fichier_choix_d_ouverture():
     choix_d_ouvertre_bouton_ouvrir_en_collan = Button(fênetre_choix_d_ouverture, text="Ouvrir un fichier en le collen avec le presse papier", command=ouverture_par_le_press_papier)
     choix_d_ouvertre_bouton_ouvrir_en_collan.pack()
 
+    choix_d_ouvertre_bouton_ouvrir_en_parcourant = Button(fênetre_choix_d_ouverture, text="Ouvrir un fichier en texte brute", command=ouverture_en_céléctionnant_un_fichier)
+    choix_d_ouvertre_bouton_ouvrir_en_parcourant.pack()
+
     annuler_choix_d_ouverture=Button(fênetre_choix_d_ouverture, text="Annuler", command=fênetre_choix_d_ouverture.destroy)
     annuler_choix_d_ouverture.pack()
 
     fênetre_choix_d_ouverture.mainloop()
     if fermeture_volontaire["fermeture_ouverture_fichier_choix_d_ouverture"]==False:     #la fermeture n'est pas volontaire, mais elle a était fait par l'utilisateur
         menu_principal()
+
+def ouverture_en_céléctionnant_un_fichier():
+    """Cette fonction permet d'ouvrir un fichier en séléctionnant un fichier."""
+    global fichier
+    def ouverture_parcourir():
+        """Cette fonction crée la fênetre d'ouverture"""
+        global fichier
+        chemin_fichier_accer_ouverture=filedialog.askopenfilename(title="Ouvrir un fichier",filetypes=[("Fichiers texte", "*.txt"), ("Fichier Scratch Draw", "*sdrw")])
+        if chemin_fichier_accer_ouverture!="":
+            fênetre_ouverture_en_séléctionnant_un_fichier.destroy()
+            fichier_temporaire=open(chemin_fichier_accer_ouverture, "r", encoding="utf8")
+            fichier=fichier_temporaire.read()
+            fênetre_ouverture_en_cours()
+
+    def annuler_ouverture_céléction():
+        """Annule l'ouverture par séléction"""
+        fênetre_ouverture_en_séléctionnant_un_fichier.destroy()
+        ouverture_fichier_choix_d_ouverture()
+
+    fênetre_choix_d_ouverture.destroy()
+
+    fênetre_ouverture_en_séléctionnant_un_fichier = Tk()
+    fênetre_ouverture_en_séléctionnant_un_fichier.title("Ouvrir un fichier")
+    fênetre_ouverture_en_séléctionnant_un_fichier.protocol("WM_DELETE_WINDOW", annuler_ouverture_céléction)
+
+    texte_fênetre_ouverture_en_séléctionnant_un_fichier = Label(fênetre_ouverture_en_séléctionnant_un_fichier, text="Vous pouvez ouvrir un fichier en texte brute : *txt ou *sdrw à condition que le fichier *sdrw a bien étais enregistrer en texte brute. \n Attention : il est recomander que l'encodage du fichier soit utf8.")
+    texte_fênetre_ouverture_en_séléctionnant_un_fichier.pack()
+
+    bouton_fênetre_ouverture_en_séléctionnant_un_fichier = Button(fênetre_ouverture_en_séléctionnant_un_fichier, text="Ouvrir le fichier", command=ouverture_parcourir)
+    bouton_fênetre_ouverture_en_séléctionnant_un_fichier.pack()
+
+    annuler_bouton_fênetre_ouverture_en_séléctionnant_un_fichier = Button(fênetre_ouverture_en_séléctionnant_un_fichier, text="Annuler", command=annuler_ouverture_céléction)
+    annuler_bouton_fênetre_ouverture_en_séléctionnant_un_fichier.pack()
+
+    fênetre_ouverture_en_séléctionnant_un_fichier.mainloop()
 
 fênetre_ouverture_press_papier=None
 chant_texte_du_fichier=None
@@ -1719,6 +1757,8 @@ def valider_chan_texte_ouverture():
     global chant_texte_du_fichier
     global chant_texte_temporaire
     chant_texte_temporaire=chant_texte_du_fichier.get()
+    global fichier
+    fichier = chant_texte_temporaire
 
     fênetre_ouverture_press_papier.destroy()
     fênetre_ouverture_en_cours()
@@ -1742,7 +1782,7 @@ def fênetre_ouverture_en_cours():
     barre_de_progression.pack()
     
     global fichier
-    fichier=chant_texte_temporaire
+    #fichier=chant_texte_temporaire
 
     fênetre_ouverture_en_cours_barre_de_progresion.after(500, ouverture_fichier_principal)          # attention : ne pas mettre un temps trop faible : la fênetre n'a pas le temps d'être correctement crée. 500 ms, c'est bon
 
