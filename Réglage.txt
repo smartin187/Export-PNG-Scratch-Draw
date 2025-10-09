@@ -1,0 +1,1 @@
+{"information : ce fichier a était généré automatiquement par le programme d'export en png pour les fichier sdrw. Le supprimer ou le modifier pourrait entrainer des erreur.": '', 'Langue': 'en', 'Log': 'DEBUG'}
