@@ -146,7 +146,7 @@ def point(caractèrelecture: int):
         information_sur_point["couleur"] += fichier[caractèrelecture]
 
     else:
-        messagebox.showerror("Erreur", "Erreur de structure pour le point, pour la couleur.")
+        messagebox.showerror(TRAD_001[langue], TRAD_033[langue])
         quit()
     
     #   position du point  ----------------------------------------------------
@@ -180,7 +180,7 @@ def point(caractèrelecture: int):
         information_sur_point["coord_x"] += fichier[caractèrelecture]
     
     else:
-        messagebox.showerror("Erreur", "Erreur de structure pour le point, pour la position x.")
+        messagebox.showerror(TRAD_001[langue], TRAD_034[langue])
         quit()
     
     #   position y :
@@ -213,7 +213,7 @@ def point(caractèrelecture: int):
     
     else:
         logging.debug("caractère avec problème : " + str(caractèrelecture))
-        messagebox.showerror("Erreur", "Erreur de structure pour le point, pour la position y.")
+        messagebox.showerror(TRAD_001[langue], TRAD_035[langue])
         quit()
     
     # taille du point --------------------------------------------
@@ -245,7 +245,7 @@ def point(caractèrelecture: int):
         information_sur_point["taille"] += fichier[caractèrelecture]
     else:
 
-        messagebox.showerror("Erreur", "Erreur de structure pour le point, pour la taille.")
+        messagebox.showerror(TRAD_001[langue], TRAD_036[langue])
         quit()
 
 
@@ -399,7 +399,7 @@ def cercle (caractèrelecture: int):
     else:
         #raise Exception("erreur de structure pour le cercle, pour la couleur du fond")
 
-        messagebox.showerror("Erreur", "Erreur de structure pour le cercle, pour la couleur du fond.")
+        messagebox.showerror(TRAD_001[langue], TRAD_037[langue])
         quit()
     
     # couleur du contoure --------------
@@ -420,7 +420,7 @@ def cercle (caractèrelecture: int):
         information_sur_cercle["couleur contour"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le cercle, pour la couleur du contoure")
-        messagebox.showerror("Erreur", "Erreur de structure pour le cercle, pour la couleur du contour.")
+        messagebox.showerror(TRAD_001[langue], TRAD_038[langue])
         quit()
     
 
@@ -455,7 +455,7 @@ def cercle (caractèrelecture: int):
     else:
         #logging.debug ("erreur de structure pour le cercle, pour position x")
         
-        messagebox.showerror("Erreur", "Erreur de structure pour le cercle, pour la position x.")
+        messagebox.showerror(TRAD_001[langue], TRAD_039[langue])
         quit()
     
     #   position y :
@@ -488,7 +488,7 @@ def cercle (caractèrelecture: int):
     
     else:
         #logging.debug ("erreur de structure pour le cercle, pour position y")
-        messagebox.showerror("Erreur", "Erreur de structure pour le cercle, pour la position y.")
+        messagebox.showerror(TRAD_001[langue], TRAD_040[langue])
         quit()
 
         # taille du cercle --------------------------------------------
@@ -520,7 +520,7 @@ def cercle (caractèrelecture: int):
         information_sur_cercle["taille"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le cercle, pour la taille")
-        messagebox.showerror("Erreur", "Erreur de structure pour le cercle, pour la taille.")
+        messagebox.showerror(TRAD_001[langue], TRAD_041[langue])
         quit()
 
 
@@ -682,7 +682,7 @@ def rectangle(caractèrelecture: int):
         information_sur_rectangle["couleur fond"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le rectangle, pour la couleur du fond")
-        messagebox.showerror("Erreur", "Erreur de structure pour le rectangle, pour la couleur du fond.")
+        messagebox.showerror(TRAD_001[langue], TRAD_042[langue])
         quit()
     
     # couleur du contoure --------------
@@ -703,7 +703,7 @@ def rectangle(caractèrelecture: int):
         information_sur_rectangle["couleur contour"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le rectangle, pour la couleur du contour")
-        messagebox.showerror("Erreur", "Erreur de structure pour le rectangle, pour la couleur du contour.")
+        messagebox.showerror(TRAD_001[langue], TRAD_043[langue])
         quit()
     
 
@@ -737,7 +737,7 @@ def rectangle(caractèrelecture: int):
     
     else:
         # logging.debug ("erreur de structure pour le rectangle, pour position x")
-        messagebox.showerror("Erreur", "Erreur de structure pour le rectangle, pour la position x.")
+        messagebox.showerror(TRAD_001[langue], TRAD_044[langue])
         quit()
     
     #   position y :
@@ -770,7 +770,7 @@ def rectangle(caractèrelecture: int):
     
     else:
         # logging.debug ("erreur de structure pour le rectangle, pour position y")
-        messagebox.showerror("Erreur", "Erreur de structure pour le rectangle, pour la position y.")
+        messagebox.showerror(TRAD_001[langue], TRAD_045[langue])
         quit()
 
     # taille du rectangle    --------------------------------------------
@@ -802,7 +802,7 @@ def rectangle(caractèrelecture: int):
         information_sur_rectangle["taille"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le rectangle, pour la taille")
-        messagebox.showerror("Erreur", "Erreur de structure pour le rectangle, pour la taille.")
+        messagebox.showerror(TRAD_001[langue], TRAD_046[langue])
         quit()
 
 
@@ -960,7 +960,7 @@ def triangle(caractèrelecture: int):
         information_sur_triangle["couleur fond"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le triangle, pour la couleur du fond")
-        messagebox.showerror("Erreur", "Erreur de structure pour le triangle, pour la couleur du fond.")
+        messagebox.showerror(TRAD_001[langue], TRAD_047[langue])
         quit()
     
     # couleur du contoure --------------
@@ -981,7 +981,7 @@ def triangle(caractèrelecture: int):
         information_sur_triangle["couleur contour"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le triangle, pour la couleur du contoure")
-        messagebox.showerror("Erreur", "Erreur de structure pour le triangle, pour la couleur du contour.")
+        messagebox.showerror(TRAD_001[langue], TRAD_048[langue])
         quit()
     
 
@@ -1015,7 +1015,7 @@ def triangle(caractèrelecture: int):
     
     else:
         # logging.debug ("erreur de structure pour le triangle, pour position x")
-        messagebox.showerror("Erreur", "Erreur de structure pour le triangle, pour la position x.")
+        messagebox.showerror(TRAD_001[langue], TRAD_049[langue])
         quit()
     
     #   position y :
@@ -1048,7 +1048,7 @@ def triangle(caractèrelecture: int):
     
     else:
         # logging.debug ("erreur de structure pour le triangle, pour position y")
-        messagebox.showerror("Erreur", "Erreur de structure pour le triangle, pour la position y.")
+        messagebox.showerror(TRAD_001[langue], TRAD_050[langue])
         quit()
 
     # taille du triangle    --------------------------------------------
@@ -1080,7 +1080,7 @@ def triangle(caractèrelecture: int):
         information_sur_triangle["taille"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le triangle, pour la taille")
-        messagebox.showerror("Erreur", "Erreur de structure pour le triangle, pour la taille.")
+        messagebox.showerror(TRAD_001[langue], TRAD_051[langue])
         quit()
 
 
@@ -1246,7 +1246,7 @@ def carré(caractèrelecture: int):
         information_sur_carré["couleur fond"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le carré, pour la couleur du fond")
-        messagebox.showerror("Erreur", "Erreur de structure pour le carré, pour la couleur du fond.")
+        messagebox.showerror(TRAD_001[langue], TRAD_052[langue])
         quit()
     
     # couleur du contoure --------------
@@ -1267,7 +1267,7 @@ def carré(caractèrelecture: int):
         information_sur_carré["couleur contour"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le carré, pour la couleur du contour")
-        messagebox.showerror("Erreur", "Erreur de structure pour le carré, pour la couleur du contour.")
+        messagebox.showerror(TRAD_001[langue], TRAD_053[langue])
         quit()
     
 
@@ -1301,7 +1301,7 @@ def carré(caractèrelecture: int):
     
     else:
         # logging.debug ("erreur de structure pour le carré, pour position x")
-        messagebox.showerror("Erreur", "Erreur de structure pour le carré, pour la position x.")
+        messagebox.showerror(TRAD_001[langue], TRAD_054[langue])
         quit()
     
     #   position y :
@@ -1334,7 +1334,7 @@ def carré(caractèrelecture: int):
     
     else:
         # logging.debug ("erreur de structure pour le carré, pour position y")
-        messagebox.showerror("Erreur", "Erreur de structure pour le carré, pour la position y.")
+        messagebox.showerror(TRAD_001[langue], TRAD_055[langue])
         quit()
 
     # taille du carré    --------------------------------------------
@@ -1366,7 +1366,7 @@ def carré(caractèrelecture: int):
         information_sur_carré["taille"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le carré, pour la taille")
-        messagebox.showerror("Erreur", "Erreur de structure pour le carré, pour la taille.")
+        messagebox.showerror(TRAD_001[langue], TRAD_056[langue])
         quit()
     logging.debug("dicionaire infocmation sur carré " + str(information_sur_carré))
 
@@ -1448,7 +1448,7 @@ def remplisage(caractèrelecture: int):
         caractèrelecture = caractèrelecture + 1
         information_sur_remplisage["couleur"] += fichier[caractèrelecture]
     else:
-        messagebox.showerror("Erreur", "Erreur de structure pour le remplisage, pour la couleur.")
+        messagebox.showerror(TRAD_001[langue], TRAD_057[langue])
         quit()
 
     caractèrelecture = caractèrelecture + 1
@@ -1478,7 +1478,7 @@ def remplisage(caractèrelecture: int):
         information_sur_remplisage["coord_x"] += fichier[caractèrelecture]
     
     else:
-        messagebox.showerror("Erreur", "Erreur de structure pour le remplisage, pour la position x.")
+        messagebox.showerror(TRAD_001[langue], TRAD_058[langue])
         quit()
     
     caractèrelecture = caractèrelecture + 1
@@ -1511,7 +1511,7 @@ def remplisage(caractèrelecture: int):
         information_sur_remplisage["coord_y"] += fichier[caractèrelecture]
     
     else:
-        messagebox.showerror("Erreur", "Erreur de structure pour le remplisage, pour la position y.")
+        messagebox.showerror(TRAD_001[langue], TRAD_059[langue])
         quit()
 
     logging.debug("information du remplisage : " + str(information_sur_remplisage))
@@ -2020,7 +2020,7 @@ def ouverture_fichier_principal():
 
     # premier controle du fichier : la longueur
     if len(fichier)<13:
-        messagebox.showerror("Erreur", "Votre fichier contient une taille anormale de caractères. Il est donc potentiellement corrompu, ou provient d'une version différente de Scratch Draw.")
+        messagebox.showerror(TRAD_001[langue], TRAD_060[langue])
         quit()
     
     # Elément de fin de fichier       -----------------------
@@ -2036,7 +2036,7 @@ def ouverture_fichier_principal():
         logging.debug ("Vertion du fichier (1) correcte")
         
     else:
-        messagebox.showerror("Erreur", "Votre fichier a une version différente de celle de ce générateur.\nLes versions supportées sont : v0, v1\nLa version du fichier est : " + fichier[-1])
+        messagebox.showerror(TRAD_001[langue], TRAD_061[langue] + fichier[-1])
         quit()
 
     fond = {"Grille" : bool(int(fichier[-2])), "couleur_de_l'arière_plant" : fichier[-3]}
@@ -2116,7 +2116,7 @@ def ouverture_fichier_principal():
 
         else:      # erreur : arrêt du programme
             
-            messagebox.showerror("Erreur", "Votre fichier contient une erreur majeure (un élément inconnu a été détecté).\nVotre fichier est peut-être d'une version plus récente que celle de cette application.")
+            messagebox.showerror(TRAD_001[langue], TRAD_062[langue])
             quit()
         
         caractèrelecture = caractèrelecture + 1

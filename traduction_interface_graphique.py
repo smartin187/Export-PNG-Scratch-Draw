@@ -111,3 +111,49 @@ TRAD_032={  # Texte ouvrir fichier texte brut
     "fr":"Ouvrir un fichier en texte brute",
     "en":"Open a file as plain text"
 }
+
+# Messages d'erreur de structure de fichier
+
+# Erreurs pour le point
+TRAD_033={"fr":"Erreur de structure pour le point, pour la couleur.", "en":"Structure error for the point, for the color."}
+TRAD_034={"fr":"Erreur de structure pour le point, pour la position x.", "en":"Structure error for the point, for the x position."}
+TRAD_035={"fr":"Erreur de structure pour le point, pour la position y.", "en":"Structure error for the point, for the y position."}
+TRAD_036={"fr":"Erreur de structure pour le point, pour la taille.", "en":"Structure error for the point, for the size."}
+
+# Erreurs pour le cercle
+TRAD_037={"fr":"Erreur de structure pour le cercle, pour la couleur du fond.", "en":"Structure error for the circle, for the background color."}
+TRAD_038={"fr":"Erreur de structure pour le cercle, pour la couleur du contour.", "en":"Structure error for the circle, for the outline color."}
+TRAD_039={"fr":"Erreur de structure pour le cercle, pour la position x.", "en":"Structure error for the circle, for the x position."}
+TRAD_040={"fr":"Erreur de structure pour le cercle, pour la position y.", "en":"Structure error for the circle, for the y position."}
+TRAD_041={"fr":"Erreur de structure pour le cercle, pour la taille.", "en":"Structure error for the circle, for the size."}
+
+# Erreurs pour le rectangle
+TRAD_042={"fr":"Erreur de structure pour le rectangle, pour la couleur du fond.", "en":"Structure error for the rectangle, for the background color."}
+TRAD_043={"fr":"Erreur de structure pour le rectangle, pour la couleur du contour.", "en":"Structure error for the rectangle, for the outline color."}
+TRAD_044={"fr":"Erreur de structure pour le rectangle, pour la position x.", "en":"Structure error for the rectangle, for the x position."}
+TRAD_045={"fr":"Erreur de structure pour le rectangle, pour la position y.", "en":"Structure error for the rectangle, for the y position."}
+TRAD_046={"fr":"Erreur de structure pour le rectangle, pour la taille.", "en":"Structure error for the rectangle, for the size."}
+
+# Erreurs pour le triangle
+TRAD_047={"fr":"Erreur de structure pour le triangle, pour la couleur du fond.", "en":"Structure error for the triangle, for the background color."}
+TRAD_048={"fr":"Erreur de structure pour le triangle, pour la couleur du contour.", "en":"Structure error for the triangle, for the outline color."}
+TRAD_049={"fr":"Erreur de structure pour le triangle, pour la position x.", "en":"Structure error for the triangle, for the x position."}
+TRAD_050={"fr":"Erreur de structure pour le triangle, pour la position y.", "en":"Structure error for the triangle, for the y position."}
+TRAD_051={"fr":"Erreur de structure pour le triangle, pour la taille.", "en":"Structure error for the triangle, for the size."}
+
+# Erreurs pour le carré
+TRAD_052={"fr":"Erreur de structure pour le carré, pour la couleur du fond.", "en":"Structure error for the square, for the background color."}
+TRAD_053={"fr":"Erreur de structure pour le carré, pour la couleur du contour.", "en":"Structure error for the square, for the outline color."}
+TRAD_054={"fr":"Erreur de structure pour le carré, pour la position x.", "en":"Structure error for the square, for the x position."}
+TRAD_055={"fr":"Erreur de structure pour le carré, pour la position y.", "en":"Structure error for the square, for the y position."}
+TRAD_056={"fr":"Erreur de structure pour le carré, pour la taille.", "en":"Structure error for the square, for the size."}
+
+# Erreurs pour le remplisage
+TRAD_057={"fr":"Erreur de structure pour le remplisage, pour la couleur.", "en":"Structure error for the fill, for the color."}
+TRAD_058={"fr":"Erreur de structure pour le remplisage, pour la position x.", "en":"Structure error for the fill, for the x position."}
+TRAD_059={"fr":"Erreur de structure pour le remplisage, pour la position y.", "en":"Structure error for the fill, for the y position."}
+
+# Erreurs générales de fichier
+TRAD_060={"fr":"Votre fichier contient une taille anormale de caractères. Il est donc potentiellement corrompu, ou provient d'une version différente de Scratch Draw.", "en":"Your file contains an abnormal number of characters. It is potentially corrupted, or comes from a different version of Scratch Draw."}
+TRAD_061={"fr":"Votre fichier a une version différente de celle de ce générateur.\nLes versions supportées sont : v0, v1\nLa version du fichier est : ", "en":"Your file has a different version from this generator.\nSupported versions are: v0, v1\nThe file version is: "}
+TRAD_062={"fr":"Votre fichier contient une erreur majeure (un élément inconnu a été détecté).\nVotre fichier est peut-être d'une version plus récente que celle de cette application.", "en":"Your file contains a major error (an unknown element was detected).\nYour file may be from a more recent version of this application."}
