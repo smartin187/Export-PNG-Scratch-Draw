@@ -1642,7 +1642,7 @@ def fênetre_erreur_réglage_fichier():
     """Cette fonction est appelé quand une erreur arrive dans l'ouverture du fichier de paramètre."""
     #traduction ?
     erreur_ouverture=Tk()
-    erreur_ouverture.title(trad_erreur[langue])
+    erreur_ouverture.title(TRAD_001[langue])
 
     texte_erreur_ouverture=Label(erreur_ouverture, text="Imposible d'ouvrir le fichier de réglage 'Réglage.txt' \n Il a peut être étais déplacer, suprimer ou modifier. \n Si il a était déplacer, il faut qu'il soit dans le même dossiez que le script 'main.py'. Si vous avez déplacer 'main.py', déplacer aussi 'Réglage.txt'. \n Les paramètre vont être réinicialiser...")
     texte_erreur_ouverture.pack()
@@ -1669,17 +1669,17 @@ def ouverture_fichier_choix_d_ouverture():
     fermeture_volontaire["fermeture_ouverture_fichier_choix_d_ouverture"]=False
 
     fênetre_choix_d_ouverture = Tk()
-    fênetre_choix_d_ouverture.title(trad_ouverture_fichier[langue])
-    Texte_choix_d_ouverture = Label(fênetre_choix_d_ouverture, text=trad_comment_ouvrir_fichier[langue])
+    fênetre_choix_d_ouverture.title(TRAD_029[langue])
+    Texte_choix_d_ouverture = Label(fênetre_choix_d_ouverture, text=TRAD_030[langue])
     Texte_choix_d_ouverture.pack()
 
-    choix_d_ouvertre_bouton_ouvrir_en_collan = Button(fênetre_choix_d_ouverture, text=trad_texte_presse_papier[langue], command=ouverture_par_le_press_papier)
+    choix_d_ouvertre_bouton_ouvrir_en_collan = Button(fênetre_choix_d_ouverture, text=TRAD_031[langue], command=ouverture_par_le_press_papier)
     choix_d_ouvertre_bouton_ouvrir_en_collan.pack()
 
-    choix_d_ouvertre_bouton_ouvrir_en_parcourant = Button(fênetre_choix_d_ouverture, text=trad_texte_ouvrir_fichier_texte_brut[langue], command=ouverture_en_céléctionnant_un_fichier)
+    choix_d_ouvertre_bouton_ouvrir_en_parcourant = Button(fênetre_choix_d_ouverture, text=TRAD_032[langue], command=ouverture_en_céléctionnant_un_fichier)
     choix_d_ouvertre_bouton_ouvrir_en_parcourant.pack()
 
-    annuler_choix_d_ouverture=Button(fênetre_choix_d_ouverture, text=trad_annuler[langue], command=fênetre_choix_d_ouverture.destroy)
+    annuler_choix_d_ouverture=Button(fênetre_choix_d_ouverture, text=TRAD_007[langue], command=fênetre_choix_d_ouverture.destroy)
     annuler_choix_d_ouverture.pack()
 
     fênetre_choix_d_ouverture.mainloop()
@@ -1692,7 +1692,7 @@ def ouverture_en_céléctionnant_un_fichier():
     def ouverture_parcourir():
         """Cette fonction crée la fênetre d'ouverture"""
         global fichier
-        chemin_fichier_accer_ouverture=filedialog.askopenfilename(title=trad_ouvrir_un_fichier[langue],filetypes=[(trad_fichier_texte[langue], "*.txt"), (trad_fichier_scratch_draw[langue], "*sdrw")])
+        chemin_fichier_accer_ouverture=filedialog.askopenfilename(title=TRAD_002[langue],filetypes=[(TRAD_003[langue], "*.txt"), (TRAD_004[langue], "*sdrw")])
         if chemin_fichier_accer_ouverture!="":
             fênetre_ouverture_en_séléctionnant_un_fichier.destroy()
             fichier_temporaire=open(chemin_fichier_accer_ouverture, "r", encoding="utf8")
@@ -1708,16 +1708,16 @@ def ouverture_en_céléctionnant_un_fichier():
     fênetre_choix_d_ouverture.destroy()
 
     fênetre_ouverture_en_séléctionnant_un_fichier = Tk()
-    fênetre_ouverture_en_séléctionnant_un_fichier.title(trad_ouvrir_un_fichier[langue])
+    fênetre_ouverture_en_séléctionnant_un_fichier.title(TRAD_002[langue])
     fênetre_ouverture_en_séléctionnant_un_fichier.protocol("WM_DELETE_WINDOW", annuler_ouverture_céléction)
 
-    texte_fênetre_ouverture_en_séléctionnant_un_fichier = Label(fênetre_ouverture_en_séléctionnant_un_fichier, text=trad_texte_info_fichier_texte[langue])
+    texte_fênetre_ouverture_en_séléctionnant_un_fichier = Label(fênetre_ouverture_en_séléctionnant_un_fichier, text=TRAD_005[langue])
     texte_fênetre_ouverture_en_séléctionnant_un_fichier.pack()
 
-    bouton_fênetre_ouverture_en_séléctionnant_un_fichier = Button(fênetre_ouverture_en_séléctionnant_un_fichier, text=trad_ouvri_le_fichier[langue], command=ouverture_parcourir)
+    bouton_fênetre_ouverture_en_séléctionnant_un_fichier = Button(fênetre_ouverture_en_séléctionnant_un_fichier, text=TRAD_006[langue], command=ouverture_parcourir)
     bouton_fênetre_ouverture_en_séléctionnant_un_fichier.pack()
 
-    annuler_bouton_fênetre_ouverture_en_séléctionnant_un_fichier = Button(fênetre_ouverture_en_séléctionnant_un_fichier, text=trad_annuler[langue], command=annuler_ouverture_céléction)
+    annuler_bouton_fênetre_ouverture_en_séléctionnant_un_fichier = Button(fênetre_ouverture_en_séléctionnant_un_fichier, text=TRAD_007[langue], command=annuler_ouverture_céléction)
     annuler_bouton_fênetre_ouverture_en_séléctionnant_un_fichier.pack()
 
     fênetre_ouverture_en_séléctionnant_un_fichier.mainloop()
@@ -1731,7 +1731,7 @@ def ouverture_par_le_press_papier():
         """Cette fonction est appelée à chaque modification du texte"""
         contenu = texte_variable.get()
         if contenu and not contenu.isdigit():
-            texte_erreur_fichier.config(text=trad_fichier_incorecte[langue])
+            texte_erreur_fichier.config(text=TRAD_008[langue])
         else:
             texte_erreur_fichier.config(text="")
 
@@ -1754,9 +1754,9 @@ def ouverture_par_le_press_papier():
     global fênetre_ouverture_press_papier
 
     fênetre_ouverture_press_papier = Tk()
-    fênetre_ouverture_press_papier.title(trad_ouverture_fichier_press_papier[langue])
+    fênetre_ouverture_press_papier.title(TRAD_009[langue])
 
-    texte_ouverture_par_le_press_papier = Label(fênetre_ouverture_press_papier, text=trad_copie_coller[langue])
+    texte_ouverture_par_le_press_papier = Label(fênetre_ouverture_press_papier, text=TRAD_010[langue])
     texte_ouverture_par_le_press_papier.pack()
     
     cadre_fichier=LabelFrame(fênetre_ouverture_press_papier, text="")
@@ -1772,13 +1772,13 @@ def ouverture_par_le_press_papier():
     chant_texte_du_fichier.pack()
     cadre_fichier.pack()
 
-    boutton_coller_le_press_papier=Button(fênetre_ouverture_press_papier, text=trad_bouton_copie_coller[langue], command=fonction_coller_le_contenu_du_press_papier)            # a terminer
+    boutton_coller_le_press_papier=Button(fênetre_ouverture_press_papier, text=TRAD_011[langue], command=fonction_coller_le_contenu_du_press_papier)            # a terminer
     boutton_coller_le_press_papier.pack()
     
-    fênetre_ouverture_press_papier_boutton_valider=Button(fênetre_ouverture_press_papier, text=trad_valider[langue], command=valider_chan_texte_ouverture)
+    fênetre_ouverture_press_papier_boutton_valider=Button(fênetre_ouverture_press_papier, text=TRAD_012[langue], command=valider_chan_texte_ouverture)
     fênetre_ouverture_press_papier_boutton_valider.pack()
 
-    annuler_press_papier=Button(fênetre_ouverture_press_papier, text=trad_annuler[langue], command=fênetre_ouverture_press_papier.destroy)
+    annuler_press_papier=Button(fênetre_ouverture_press_papier, text=TRAD_007[langue], command=fênetre_ouverture_press_papier.destroy)
     annuler_press_papier.pack()
 
     fênetre_ouverture_press_papier.mainloop()
@@ -1809,9 +1809,9 @@ def fênetre_ouverture_en_cours():
     global chant_texte_temporaire
     global fênetre_ouverture_en_cours_barre_de_progresion
     fênetre_ouverture_en_cours_barre_de_progresion=Tk()
-    fênetre_ouverture_en_cours_barre_de_progresion.title(trad_ouverture_en_cours[langue])
+    fênetre_ouverture_en_cours_barre_de_progresion.title(TRAD_013[langue])
     
-    texte_ouverture_en_cours=Label(fênetre_ouverture_en_cours_barre_de_progresion, text=trad_ouverture_en_cours_bis[langue])
+    texte_ouverture_en_cours=Label(fênetre_ouverture_en_cours_barre_de_progresion, text=TRAD_014[langue])
     texte_ouverture_en_cours.pack()
     
     # barre de progression
@@ -1845,15 +1845,15 @@ def ouverture_terminé():
     global ouverture_terminer_fênetre
     ouverture_terminer_fênetre=Tk()
 
-    ouverture_terminer_fênetre.title(trad_ouverture_terminé[langue])
+    ouverture_terminer_fênetre.title(TRAD_015[langue])
 
-    texte_ouverture_terminer=Label(ouverture_terminer_fênetre, text=trad_ouverture_terminé_bis[langue])
+    texte_ouverture_terminer=Label(ouverture_terminer_fênetre, text=TRAD_016[langue])
     texte_ouverture_terminer.pack()
 
-    bouton_ouverture_terminer_enregistrer=Button(ouverture_terminer_fênetre, text=trad_enregistrer_l_image[langue], command=enregistrer_l_image_fênetre)
+    bouton_ouverture_terminer_enregistrer=Button(ouverture_terminer_fênetre, text=TRAD_017[langue], command=enregistrer_l_image_fênetre)
     bouton_ouverture_terminer_enregistrer.pack()
     
-    bouton_ouverture_terminer_quitter=Button(ouverture_terminer_fênetre, text=trad_quitter[langue], command=quitter_ouverture_terminé)
+    bouton_ouverture_terminer_quitter=Button(ouverture_terminer_fênetre, text=TRAD_018[langue], command=quitter_ouverture_terminé)
     bouton_ouverture_terminer_quitter.pack()
 
     ouverture_terminer_fênetre.protocol("WM_DELETE_WINDOW", quitter_ouverture_terminé)
@@ -1867,7 +1867,7 @@ def enregistrer_l_image_fênetre():
     chemain_d_accer_fichier_enregistrer=filedialog.asksaveasfilename(
         defaultextension=".png",
         filetypes=[("PNG files", "*.png")],
-        title=trad_enregistrer_l_image[langue]
+        title=TRAD_017[langue]
     )
     ouverture_terminer_fênetre.destroy()
     if chemain_d_accer_fichier_enregistrer=="":
@@ -1895,21 +1895,21 @@ def enregistrement_réussit():
             logging.error(f"Erreur lors de l'ouverture de l'explorateur: {str(e)}")
     
     fênetre_enregistrement_réussit_fênetre=Tk()
-    fênetre_enregistrement_réussit_fênetre.title(trad_enregistrement_terminer[langue])
+    fênetre_enregistrement_réussit_fênetre.title(TRAD_019[langue])
 
-    texte_fênetre_enregistrement_réussit_fênetre=Label(fênetre_enregistrement_réussit_fênetre, text=trad_enregistrement_sucées[langue])
+    texte_fênetre_enregistrement_réussit_fênetre=Label(fênetre_enregistrement_réussit_fênetre, text=TRAD_020[langue])
     texte_fênetre_enregistrement_réussit_fênetre.pack()
     
-    cadre_ouverture=LabelFrame(fênetre_enregistrement_réussit_fênetre, text=trad_ouvrir_bis[langue])
+    cadre_ouverture=LabelFrame(fênetre_enregistrement_réussit_fênetre, text=TRAD_021[langue])
     cadre_ouverture.pack()
 
-    afficher_dans_explorateur_fichier_fênetre_enregistrement_réussit_fênetre=Button(cadre_ouverture, text=trad_afficher_explorateur_fichier[langue], command=ouvrir_dans_explorateur)
+    afficher_dans_explorateur_fichier_fênetre_enregistrement_réussit_fênetre=Button(cadre_ouverture, text=TRAD_022[langue], command=ouvrir_dans_explorateur)
     afficher_dans_explorateur_fichier_fênetre_enregistrement_réussit_fênetre.pack()
 
-    ouvrir_l_image=Button(cadre_ouverture, text=trad_ouvrir_l_image[langue], command=image_pour_afficher.show)
+    ouvrir_l_image=Button(cadre_ouverture, text=TRAD_023[langue], command=image_pour_afficher.show)
     ouvrir_l_image.pack()
 
-    retour_menue_principal_fênetre_enregistrement_réussit_fênetre=Button(fênetre_enregistrement_réussit_fênetre, text=trad_retours_menu[langue], command=retour_menu_principal)
+    retour_menue_principal_fênetre_enregistrement_réussit_fênetre=Button(fênetre_enregistrement_réussit_fênetre, text=TRAD_024[langue], command=retour_menu_principal)
     retour_menue_principal_fênetre_enregistrement_réussit_fênetre.pack()
 
     fênetre_enregistrement_réussit_fênetre.protocol("WM_DELETE_WINDOW", retour_menu_principal)
@@ -1966,9 +1966,9 @@ def paramètre():
     fênetre_principal.destroy()
 
     fênetre_paramètre=Tk()
-    fênetre_paramètre.title(trad_paramètre[langue])
+    fênetre_paramètre.title(TRAD_025[langue])
 
-    texte_fêttre_paramètre=Label(fênetre_paramètre, text=trad_texte_paramètre[langue])
+    texte_fêttre_paramètre=Label(fênetre_paramètre, text=TRAD_026[langue])
     texte_fêttre_paramètre.pack()
 
     frame_langue=LabelFrame(fênetre_paramètre, text="Langue")
@@ -1994,10 +1994,10 @@ def paramètre():
     
     fram_log.pack()
 
-    bouton_valider=Button(fênetre_paramètre, text=trad_valider[langue], command=valider_paramètre)
+    bouton_valider=Button(fênetre_paramètre, text=TRAD_012[langue], command=valider_paramètre)
     bouton_valider.pack()
 
-    bouton_anuler_paramètre=Button(fênetre_paramètre, text=trad_annuler[langue], command=quitter_paramètre)
+    bouton_anuler_paramètre=Button(fênetre_paramètre, text=TRAD_007[langue], command=quitter_paramètre)
     bouton_anuler_paramètre.pack()
 
     fênetre_paramètre.protocol("WM_DELETE_WINDOW", quitter_paramètre)
@@ -2016,20 +2016,20 @@ def menu_principal():
     global fênetre_principal
     fênetre_principal = Tk()
     fênetre_principal.title("Export PNG Scratch Draw") # pas de trad
-    Texte_menu_principal = Label(fênetre_principal, text=trad_bienvenu[langue])
+    Texte_menu_principal = Label(fênetre_principal, text=TRAD_027[langue])
     Texte_menu_principal.pack()
     fênetre_principal.protocol("WM_DELETE_WINDOW", quitter_menu)
 
-    ouvrir_posibilité=LabelFrame(fênetre_principal, text=trad_ouvrir_bis[langue])
-    menu_principal_bouton_ouverture_fichier_simple = Button(ouvrir_posibilité, text=trad_ouvrir_et_export_fichier[langue], command=ouverture_fichier_choix_d_ouverture)
+    ouvrir_posibilité=LabelFrame(fênetre_principal, text=TRAD_021[langue])
+    menu_principal_bouton_ouverture_fichier_simple = Button(ouvrir_posibilité, text=TRAD_028[langue], command=ouverture_fichier_choix_d_ouverture)
     menu_principal_bouton_ouverture_fichier_simple.pack()
 
     ouvrir_posibilité.pack()
 
-    menu_principal_bouton_paramètre = Button(fênetre_principal, text=trad_paramètre[langue], command=paramètre)
+    menu_principal_bouton_paramètre = Button(fênetre_principal, text=TRAD_025[langue], command=paramètre)
     menu_principal_bouton_paramètre.pack()
 
-    menu_principal_bouton_quitter = Button(fênetre_principal, text=trad_quitter[langue], command=quitter_menu)
+    menu_principal_bouton_quitter = Button(fênetre_principal, text=TRAD_018[langue], command=quitter_menu)
     menu_principal_bouton_quitter.pack()
 
     fênetre_principal.mainloop()
