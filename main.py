@@ -38,6 +38,7 @@ import logging
 from tkinter import filedialog
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 from PIL import Image, ImageDraw, Image
 import os
@@ -145,10 +146,8 @@ def point(caractèrelecture: int):
         information_sur_point["couleur"] += fichier[caractèrelecture]
 
     else:
-        print("erreur de structure pour le point, pour la couleur")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le point, pour la couleur.")
+        quit()
     
     #   position du point  ----------------------------------------------------
 
@@ -181,10 +180,8 @@ def point(caractèrelecture: int):
         information_sur_point["coord_x"] += fichier[caractèrelecture]
     
     else:
-        print("erreur de structure pour le point, pour la position x")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le point, pour la position x.")
+        quit()
     
     #   position y :
 
@@ -216,10 +213,8 @@ def point(caractèrelecture: int):
     
     else:
         logging.debug("caractère avec problème : " + str(caractèrelecture))
-        print("erreur de structure pour le point, pour la position y")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le point, pour la position y.")
+        quit()
     
     # taille du point --------------------------------------------
     
@@ -250,10 +245,8 @@ def point(caractèrelecture: int):
         information_sur_point["taille"] += fichier[caractèrelecture]
     else:
 
-        print("erreur de structure pour le point, pour la taille")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le point, pour la taille.")
+        quit()
 
 
     logging.debug("point de couleur " + information_sur_point["couleur"])
@@ -406,10 +399,8 @@ def cercle (caractèrelecture: int):
     else:
         #raise Exception("erreur de structure pour le cercle, pour la couleur du fond")
 
-        print("erreur de structure pour le cercle, pour la couleur du fond")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le cercle, pour la couleur du fond.")
+        quit()
     
     # couleur du contoure --------------
     
@@ -429,10 +420,8 @@ def cercle (caractèrelecture: int):
         information_sur_cercle["couleur contour"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le cercle, pour la couleur du contoure")
-        print("erreur de structure pour le cercle, pour la couleur du contoure")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le cercle, pour la couleur du contour.")
+        quit()
     
 
     #   position x :
@@ -466,10 +455,8 @@ def cercle (caractèrelecture: int):
     else:
         #logging.debug ("erreur de structure pour le cercle, pour position x")
         
-        print("erreur de structure pour le cercle, pour la position x")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le cercle, pour la position x.")
+        quit()
     
     #   position y :
 
@@ -501,10 +488,8 @@ def cercle (caractèrelecture: int):
     
     else:
         #logging.debug ("erreur de structure pour le cercle, pour position y")
-        print("erreur de structure pour le cercle, pour la position y")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le cercle, pour la position y.")
+        quit()
 
         # taille du cercle --------------------------------------------
     
@@ -535,10 +520,8 @@ def cercle (caractèrelecture: int):
         information_sur_cercle["taille"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le cercle, pour la taille")
-        print("erreur de structure pour le cercle, pour la taille")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le cercle, pour la taille.")
+        quit()
 
 
 
@@ -699,10 +682,8 @@ def rectangle(caractèrelecture: int):
         information_sur_rectangle["couleur fond"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le rectangle, pour la couleur du fond")
-        print("erreur de structure pour le rectangle, pour la couleur du fond")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le rectangle, pour la couleur du fond.")
+        quit()
     
     # couleur du contoure --------------
     
@@ -722,10 +703,8 @@ def rectangle(caractèrelecture: int):
         information_sur_rectangle["couleur contour"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le rectangle, pour la couleur du contour")
-        print("erreur de structure pour le rectangle, pour la couleur du contour")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le rectangle, pour la couleur du contour.")
+        quit()
     
 
         #   position x :
@@ -758,10 +737,8 @@ def rectangle(caractèrelecture: int):
     
     else:
         # logging.debug ("erreur de structure pour le rectangle, pour position x")
-        print("erreur de structure pour le rectangle, pour la position x")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le rectangle, pour la position x.")
+        quit()
     
     #   position y :
 
@@ -793,10 +770,8 @@ def rectangle(caractèrelecture: int):
     
     else:
         # logging.debug ("erreur de structure pour le rectangle, pour position y")
-        print("erreur de structure pour le rectangle, pour la position y")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le rectangle, pour la position y.")
+        quit()
 
     # taille du rectangle    --------------------------------------------
     
@@ -827,10 +802,8 @@ def rectangle(caractèrelecture: int):
         information_sur_rectangle["taille"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le rectangle, pour la taille")
-        print("erreur de structure pour le rectangle, pour la taille")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le rectangle, pour la taille.")
+        quit()
 
 
 
@@ -987,10 +960,8 @@ def triangle(caractèrelecture: int):
         information_sur_triangle["couleur fond"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le triangle, pour la couleur du fond")
-        print("erreur de structure pour le triangle, pour la couleur du fond")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le triangle, pour la couleur du fond.")
+        quit()
     
     # couleur du contoure --------------
     
@@ -1010,10 +981,8 @@ def triangle(caractèrelecture: int):
         information_sur_triangle["couleur contour"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le triangle, pour la couleur du contoure")
-        print("erreur de structure pour le triangle, pour la couleur du contoure")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le triangle, pour la couleur du contour.")
+        quit()
     
 
         #   position x :
@@ -1046,10 +1015,8 @@ def triangle(caractèrelecture: int):
     
     else:
         # logging.debug ("erreur de structure pour le triangle, pour position x")
-        print("erreur de structure pour le triangle, pour la position x")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le triangle, pour la position x.")
+        quit()
     
     #   position y :
 
@@ -1081,10 +1048,8 @@ def triangle(caractèrelecture: int):
     
     else:
         # logging.debug ("erreur de structure pour le triangle, pour position y")
-        print("erreur de structure pour le triangle, pour la position y")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le triangle, pour la position y.")
+        quit()
 
     # taille du triangle    --------------------------------------------
     
@@ -1115,10 +1080,8 @@ def triangle(caractèrelecture: int):
         information_sur_triangle["taille"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le triangle, pour la taille")
-        print("erreur de structure pour le triangle, pour la taille")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le triangle, pour la taille.")
+        quit()
 
 
 
@@ -1283,10 +1246,8 @@ def carré(caractèrelecture: int):
         information_sur_carré["couleur fond"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le carré, pour la couleur du fond")
-        print("erreur de structure pour le carré, pour la couleur du fond")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le carré, pour la couleur du fond.")
+        quit()
     
     # couleur du contoure --------------
     
@@ -1306,10 +1267,8 @@ def carré(caractèrelecture: int):
         information_sur_carré["couleur contour"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le carré, pour la couleur du contour")
-        print("erreur de structure pour le carré, pour la couleur du contour")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le carré, pour la couleur du contour.")
+        quit()
     
 
         #   position x :
@@ -1342,10 +1301,8 @@ def carré(caractèrelecture: int):
     
     else:
         # logging.debug ("erreur de structure pour le carré, pour position x")
-        print("erreur de structure pour le carré, pour la position x")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le carré, pour la position x.")
+        quit()
     
     #   position y :
 
@@ -1377,10 +1334,8 @@ def carré(caractèrelecture: int):
     
     else:
         # logging.debug ("erreur de structure pour le carré, pour position y")
-        print("erreur de structure pour le carré, pour la position y")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le carré, pour la position y.")
+        quit()
 
     # taille du carré    --------------------------------------------
     
@@ -1411,10 +1366,8 @@ def carré(caractèrelecture: int):
         information_sur_carré["taille"] += fichier[caractèrelecture]
     else:
         #raise Exception("erreur de structure pour le carré, pour la taille")
-        print("erreur de structure pour le carré, pour la taille")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le carré, pour la taille.")
+        quit()
     logging.debug("dicionaire infocmation sur carré " + str(information_sur_carré))
 
     return caractèrelecture
@@ -1495,10 +1448,8 @@ def remplisage(caractèrelecture: int):
         caractèrelecture = caractèrelecture + 1
         information_sur_remplisage["couleur"] += fichier[caractèrelecture]
     else:
-        print("erreur de structure pour le remplisage, pour la couleur")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le remplisage, pour la couleur.")
+        quit()
 
     caractèrelecture = caractèrelecture + 1
 
@@ -1527,10 +1478,8 @@ def remplisage(caractèrelecture: int):
         information_sur_remplisage["coord_x"] += fichier[caractèrelecture]
     
     else:
-        print("erreur de structure pour le remplisage, pour la position x")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le remplisage, pour la position x.")
+        quit()
     
     caractèrelecture = caractèrelecture + 1
 
@@ -1562,10 +1511,8 @@ def remplisage(caractèrelecture: int):
         information_sur_remplisage["coord_y"] += fichier[caractèrelecture]
     
     else:
-        print("erreur de structure pour le remplisage, pour la position y")
-        varibale_pour_validation=input("Apuiller sur entré pour retourner au menu principal")
-        annuler_ouverture=True
-        return caractèrelecture
+        messagebox.showerror("Erreur", "Erreur de structure pour le remplisage, pour la position y.")
+        quit()
 
     logging.debug("information du remplisage : " + str(information_sur_remplisage))
     
@@ -2073,16 +2020,8 @@ def ouverture_fichier_principal():
 
     # premier controle du fichier : la longueur
     if len(fichier)<13:
-        print("Votre fichier contient une taille anormale de caratrères. Il est donc potentiellement corrompu, ou provient d'une vertion différnete de Scratch Draw.")
-        print("Appuiller sur Entrée pour ouvrir ce fichier et Q pour quiter.")
-        réponse_controle_fichier_longueur=input("")
-
-        if réponse_controle_fichier_longueur=="":
-            print ("Le fichier sera ouver, mais il y a des risque de dysfonctionnement...")
-
-        elif (réponse_controle_fichier_longueur=="q") or (réponse_controle_fichier_longueur=="Q"):
-            logging.debug("l'ouverture du fichier est anulé en raison de la taille anormal")
-            annuler_ouverture=True
+        messagebox.showerror("Erreur", "Votre fichier contient une taille anormale de caractères. Il est donc potentiellement corrompu, ou provient d'une version différente de Scratch Draw.")
+        quit()
     
     # Elément de fin de fichier       -----------------------
 
@@ -2097,22 +2036,8 @@ def ouverture_fichier_principal():
         logging.debug ("Vertion du fichier (1) correcte")
         
     else:
-        print ("Attention : votre fichier a une version différente de celle de ce générateur.")
-        print ("Les vertion suporté sont : v0, v1")
-        print ("La vertion du fichier est : " + fichier[-1])
-
-        print ("Appuiller sur Entée pour continuer et Q pour quitter")
-
-        ouvrir_un_fichier_avec_mauvaise_vertion=input("")
-
-        if ouvrir_un_fichier_avec_mauvaise_vertion == "":
-            print ("Le fichier sera ouvert, mais il y a des risques de dysfonctionnement...")
-        
-        elif ouvrir_un_fichier_avec_mauvaise_vertion == "Q" or ouvrir_un_fichier_avec_mauvaise_vertion == "q":
-            annuler_ouverture=True
-
-        else:
-            print ("commande inconue")
+        messagebox.showerror("Erreur", "Votre fichier a une version différente de celle de ce générateur.\nLes versions supportées sont : v0, v1\nLa version du fichier est : " + fichier[-1])
+        quit()
 
     fond = {"Grille" : bool(int(fichier[-2])), "couleur_de_l'arière_plant" : fichier[-3]}
 
@@ -2191,11 +2116,8 @@ def ouverture_fichier_principal():
 
         else:      # erreur : arrêt du programme
             
-            print ("Votre fichier contient une erreur majeur (un élément inconue a était détecter)")
-            print ("Votre fichier est peut-être d'une version plus récente que celle de cette aplication.")
-            varibale_pour_validation=input("Appuiller sur Entrée pour quiter")
-
-            break
+            messagebox.showerror("Erreur", "Votre fichier contient une erreur majeure (un élément inconnu a été détecté).\nVotre fichier est peut-être d'une version plus récente que celle de cette application.")
+            quit()
         
         caractèrelecture = caractèrelecture + 1
         pourcentage_ouverture.set(caractèrelecture/len(fichier)*100)
