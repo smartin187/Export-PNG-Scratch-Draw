@@ -1,56 +1,58 @@
 # Export PNG Scratch Draw
 
-Ce programme écrit en Python vous permet d'exporter en PNG un fichier créé par le programme Scratch [Scratch Draw](https://scratch.mit.edu/projects/782765473/).
-Pour exécuter le script, vous devez le télécharger. Vérifiez aussi que les librairies sont installées (voir [Librairies utilisées](#librairies-utilisées)).
+This Python program lets you export to PNG a file created with the Scratch project [Scratch Draw](https://scratch.mit.edu/projects/782765473/).
+To run the script, download it first. Also make sure the required libraries are installed (see [Libraries used](#libraries-used)).
 
-## Ouvrir et exporter une image
+## Open and export an image
 
-Pour ouvrir une image, cliquez sur "Ouvrir et exporter un fichier", dans le menu principal.
+To open an image, click "Open and export a file" in the main menu.
 
-### Ouverture
-Vous avez deux possibilités pour ouvrir votre fichier :
-- [Ouverture par le presse-papiers](#ouverture-par-le-presse-papiers)
-- [Ouverture d'un fichier en texte brut](#ouverture-dun-fichier-en-texte-brut)
-#### Ouverture par le presse-papiers
-Cliquez sur "Ouvrir un fichier en le collant avec le presse-papiers".
-Collez le fichier Scratch Draw dans la saisie de texte, puis cliquez sur "Valider".
+### Opening
+You have two ways to open your file:
+- [Open from clipboard](#open-from-clipboard)
+- [Open a plain text file](#open-a-plain-text-file)
 
-#### Ouverture d'un fichier en texte brut
-Cliquez sur "Ouvrir un fichier en texte brut", puis sur "Ouvrir le fichier".
-Vous devez sélectionner le fichier que vous voulez ouvrir, attention : il doit être en texte brut.
+#### Open from clipboard
+Click "Open a file by pasting from the clipboard".
+Paste the Scratch Draw file into the text input, then click "Validate".
 
-### Ouverture terminée
-L'ouverture s'effectuera, quand elle sera terminée, cliquez sur "Enregistrer l'image", et sélectionnez le répertoire dans lequel vous voulez enregistrer votre image.
-Une fois votre image enregistrée, l'export est terminé.
-Vous pouvez retourner au menu principal, ou cliquer sur "Afficher dans l'explorateur de fichiers".
+#### Open a plain text file
+Click "Open a plain text file", then "Open the file".
+Select the file you want to open. Warning: it must be a plain text file.
 
-## Librairies utilisées
+### Opening complete
+When opening is finished, click "Save image" and choose the directory where you want to save your image.
+Once your image is saved, the export is complete.
+You can return to the main menu, or click "Show in File Explorer".
 
-Ce programme utilise des librairies :
+## Libraries used
+
+This program uses the following libraries:
 
 - Tkinter
 - PIL
-- Logging
+- logging
 - os
 - platform
 - subprocess
 - pathlib
 
-Vérifiez si ces librairies sont bien installées sur votre ordinateur. Si ce n'est pas le cas, vous ne pourrez pas exécuter le script.
+Make sure these libraries are installed on your computer. Otherwise, you won't be able to run the script.
 
-## Paramétrage
+## Settings
 
-Vous pouvez paramétrer cette application.
-Notez que les paramétrages sont enregistrés dans le fichier "Réglage.txt". Si vous modifiez / supprimez / déplacez ce fichier, il peut y avoir des dysfonctionnements. Notez que ce fichier doit être dans le même répertoire que le script main.py.
+You can configure this application.
+Note that the settings are stored in the file "Réglage.txt". If you modify / delete / move this file, the application may misbehave. This file must be in the same directory as the script main.py.
 
-### Réglage de la langue
-Vous pouvez choisir français ou anglais pour la langue.
-### Réglage du log
-Vous pouvez choisir le niveau du log :
+### Language setting
+You can choose French or English for the language.
+
+### Log setting
+You can choose the logging level:
 - Debug
 - Info
 - Warning
 - Error
 - Fatal
 
-Si vous souhaitez modifier le script, mettez le log à Debug pour avoir des informations sur l'utilisation, alors que si vous voulez uniquement utiliser cette application, réglez le log sur Error par exemple.
+If you want to modify the script, set the log level to Debug to get usage information. If you only want to use the application, set it to Error for example.
