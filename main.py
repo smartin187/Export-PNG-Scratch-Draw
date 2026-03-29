@@ -47,6 +47,7 @@ import subprocess
 
 from pathlib import Path
 from ast import literal_eval
+from typing import Tuple
 
 from couleur_scrach_draw import *
 from infocmation_sur_élément import *
@@ -1548,7 +1549,7 @@ def grille():
 
 image_fond=None
 
-def couleur_du_fond(couleur):
+def couleur_du_fond(couleur: Tuple[int, int, int, int]):
     global image_fond
     image_fond = Image.new('RGBA', (480, 360), color = couleur)
     d_fond = ImageDraw.Draw(image_fond)
@@ -1674,7 +1675,7 @@ chant_texte_du_fichier=None
 def ouverture_par_le_press_papier():
     """Cette fonction crée une fênetre avec un chant texte de saisie pour coller le fichier à ouvrire."""
     
-    def Controle_chant_texte(*args):
+    def Controle_chant_texte(*args: str):
         """Cette fonction est appelée à chaque modification du texte"""
         contenu = texte_variable.get()
         if contenu and not contenu.isdigit():
