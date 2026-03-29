@@ -58,7 +58,7 @@ logging.basicConfig(level=logging.DEBUG)
 caractèrelecture = 0
 
 # fonction pour le point :--------------------------------------------------------------------------------------
-def tracer_point():
+def tracer_point() -> None:
     """permet de tracer le point sur l'image, en fonction du dictonnaire information_sur_point"""
     logging.debug ("rentrer dans la fonction tracer_point")
     
@@ -124,7 +124,7 @@ def tracer_point():
     d.ellipse((position_de_départ, position_finale), fill=couleur_temporaire_fond)
 
 
-def point(caractèrelecture: int):
+def point(caractèrelecture: int) -> int:
     """permet de mettre dans le dictionaire information_sur_point toutes les donné pour tracer le point."""
 
     global annuler_ouverture
@@ -259,7 +259,7 @@ def point(caractèrelecture: int):
 
 # fonction pour le cercle :--------------------------------------------------------------------------------------
 
-def tracer_cercle():
+def tracer_cercle() -> None:
     """permet de tracer le cercle avec le dictionnaire infocmation_sur_cercle"""
 
     logging.debug("entrer dans la fonction tracer_cercle")
@@ -375,7 +375,7 @@ def tracer_cercle():
 
     d_forme.ellipse((position_de_départ, position_finale), fill=couleur_temporaire_fond, outline=couleur_temporaire_contour, width=epaiseur_du_bord)
 
-def cercle (caractèrelecture: int):
+def cercle (caractèrelecture: int) -> int:
     
     """permet de mettre dans le dictionaire information_sur_cercle toutes les donné pour tracer le cercle."""
 
@@ -533,7 +533,7 @@ def cercle (caractèrelecture: int):
 
 # fonction pour le recrtangle :     --------------------------------------------------------------------------------------
 
-def tracer_rectangle():
+def tracer_rectangle() -> None:
     """permet de tracer le rectangle avec le dictionnaire infocmation_sur_rectangle"""
 
     #   couleur de la forme :
@@ -660,7 +660,7 @@ def tracer_rectangle():
     
 
 
-def rectangle(caractèrelecture: int):
+def rectangle(caractèrelecture: int) -> int:
     """permet de mettre dans le dictionaire information_sur_rectangle toutes les donné pour tracer le rectangle."""
 
     global annuler_ouverture
@@ -813,7 +813,7 @@ def rectangle(caractèrelecture: int):
 
     return caractèrelecture
 
-def tracer_triangle():
+def tracer_triangle() -> None:
     """permet de tracer le triangle avec le dicionnaire infocmation_sur_triangle"""
 
     logging.debug("rentré dans la fonction cracer_triangle")
@@ -938,7 +938,7 @@ def tracer_triangle():
     
 
 
-def triangle(caractèrelecture: int):
+def triangle(caractèrelecture: int) -> int:
     """permet de mettre dans le dictionaire information_sur_triangle toutes les donné pour tracer le triangle."""
 
     global annuler_ouverture
@@ -1091,7 +1091,7 @@ def triangle(caractèrelecture: int):
 
     return caractèrelecture
 
-def tracer_carré():
+def tracer_carré() -> None:
     """permet de tracer le carré avec le dicionaire infocmation_sur_carré"""
 
     logging.debug("entrer dans la fonction tracer_carré")
@@ -1224,7 +1224,7 @@ def tracer_carré():
     d_forme.rectangle([position_de_départ, position_final], fill=couleur_temporaire_fond, outline=couleur_temporaire_contour, width=epaiseur_du_bord)
 
 
-def carré(caractèrelecture: int):
+def carré(caractèrelecture: int) -> int:
     """permet de mettre dans le dictionaire information_sur_carré toutes les donné pour tracer le carré."""
 
     global annuler_ouverture
@@ -1374,7 +1374,7 @@ def carré(caractèrelecture: int):
     return caractèrelecture
 
 
-def tracer_remplisage():
+def tracer_remplisage() -> None:
     """permet de tracer le remplisage avec le dicionnaire information sur remplisage"""          # ajouter la couleur
     logging.debug("rentrer dans la fonction tracer_remplisage")
 
@@ -1429,7 +1429,7 @@ def tracer_remplisage():
 
     ImageDraw.floodfill(image_point, (int(information_sur_remplisage["coord_x"]), int(information_sur_remplisage["coord_y"])), couleur_temporaire_contour, thresh=0)
 
-def remplisage(caractèrelecture: int):
+def remplisage(caractèrelecture: int) -> int:
     """permet d'analyser le fichier pour un remplisage. met toutes les donné dans le dictionaire information sur remplisage
     note : il peut y avoir des problème avec le remplisage a cause de bug de Scratch Draw, et non pas de ce projet."""
     logging.debug("rentrer dans la fonction remplisage")
@@ -1519,7 +1519,7 @@ def remplisage(caractèrelecture: int):
     
     return caractèrelecture
 
-def grille():
+def grille() -> None:
     """
     Cette fonction permet de tracer le grille si le paramètre est activer.
     nombre de ligne en largeur de la grille : 15
@@ -1527,11 +1527,11 @@ def grille():
     """
     logging.debug("entrer dans la fonction grille")
 
-    def ligne_orisontal(position_y_départ:int):
+    def ligne_orisontal(position_y_départ:int) -> None:
         """permet de tracer une ligne de la grille (ligne orisontal)"""
         d_forme.line((0, position_y_départ, 480, position_y_départ), fill=noir, width=2)
     
-    def ligne_vertical(position_x_départ:int):
+    def ligne_vertical(position_x_départ:int) -> None:
         """permet de tracer une ligne de la grille (ligne vertical)"""
         d_forme.line((position_x_départ, 0, position_x_départ, 360), fill=noir, width=2)
 
@@ -1549,7 +1549,7 @@ def grille():
 
 image_fond=None
 
-def couleur_du_fond(couleur: Tuple[int, int, int, int]):
+def couleur_du_fond(couleur: Tuple[int, int, int, int]) -> None:
     global image_fond
     image_fond = Image.new('RGBA', (480, 360), color = couleur)
     d_fond = ImageDraw.Draw(image_fond)
@@ -1566,7 +1566,7 @@ paramètre_réglage={}
 
 langue=None
 
-def lecture_réglage():
+def lecture_réglage() -> None:
     """Cette fonction lis les réglage du fichier réglage.txt"""
     try:
         global paramètre_réglage
@@ -1586,7 +1586,7 @@ def lecture_réglage():
 
 # intercafe graphique -----------------------------------------------------------------------------------------------------
 
-def fênetre_erreur_réglage_fichier():
+def fênetre_erreur_réglage_fichier() -> None:
     """Cette fonction est appelé quand une erreur arrive dans l'ouverture du fichier de paramètre."""
     #traduction ?
     erreur_ouverture=Tk()
@@ -1602,7 +1602,7 @@ def fênetre_erreur_réglage_fichier():
 fermeture_volontaire={"fermeture_ouverture_fichier_choix_d_ouverture":False, "fermeture_ouverture_par_le_press_papier":False}
 
 fênetre_principal_choix_d_ouverture=None
-def ouverture_fichier_choix_d_ouverture():
+def ouverture_fichier_choix_d_ouverture() -> None:
     """Cette fonction crée une fênetre pour choisire comment ouvrir un fichier : coller le fichier ou ouvrir un fichier."""
     
     try:
@@ -1634,10 +1634,10 @@ def ouverture_fichier_choix_d_ouverture():
     if fermeture_volontaire["fermeture_ouverture_fichier_choix_d_ouverture"]==False:     #la fermeture n'est pas volontaire, mais elle a était fait par l'utilisateur
         menu_principal()
 
-def ouverture_en_céléctionnant_un_fichier():
+def ouverture_en_céléctionnant_un_fichier() -> None:
     """Cette fonction permet d'ouvrir un fichier en séléctionnant un fichier."""
     global fichier
-    def ouverture_parcourir():
+    def ouverture_parcourir() -> None:
         """Cette fonction crée la fênetre d'ouverture"""
         global fichier
         chemin_fichier_accer_ouverture=filedialog.askopenfilename(title=TRAD_002[langue],filetypes=[(TRAD_003[langue], "*.txt"), (TRAD_004[langue], "*sdrw")])
@@ -1648,7 +1648,7 @@ def ouverture_en_céléctionnant_un_fichier():
             fichier_temporaire.close()
             fênetre_ouverture_en_cours()
 
-    def annuler_ouverture_céléction():
+    def annuler_ouverture_céléction() -> None:
         """Annule l'ouverture par séléction"""
         fênetre_ouverture_en_séléctionnant_un_fichier.destroy()
         ouverture_fichier_choix_d_ouverture()
@@ -1672,10 +1672,10 @@ def ouverture_en_céléctionnant_un_fichier():
 
 fênetre_ouverture_press_papier=None
 chant_texte_du_fichier=None
-def ouverture_par_le_press_papier():
+def ouverture_par_le_press_papier() -> None:
     """Cette fonction crée une fênetre avec un chant texte de saisie pour coller le fichier à ouvrire."""
     
-    def Controle_chant_texte(*args: str):
+    def Controle_chant_texte(*args: str) -> None:
         """Cette fonction est appelée à chaque modification du texte"""
         contenu = texte_variable.get()
         if contenu and not contenu.isdigit():
@@ -1683,7 +1683,7 @@ def ouverture_par_le_press_papier():
         else:
             texte_erreur_fichier.config(text="")
 
-    def fonction_coller_le_contenu_du_press_papier():
+    def fonction_coller_le_contenu_du_press_papier() -> None:
         """cette fonction permet de coller le contenu du press papier dans la saisie de texte."""
         #fênetre_ouverture_press_papier.withdraw()
         chant_texte_du_fichier.delete(0, END)
@@ -1737,7 +1737,7 @@ def ouverture_par_le_press_papier():
 
 chant_texte_temporaire=None
 
-def valider_chan_texte_ouverture():
+def valider_chan_texte_ouverture() -> None:
     """Cette fonction est apeller losque le chant texte d'ouverture de fichier est valide"""
     global fermeture_volontaire
     fermeture_volontaire["fermeture_ouverture_par_le_press_papier"]=True
@@ -1753,7 +1753,7 @@ def valider_chan_texte_ouverture():
 fênetre_ouverture_en_cours_barre_de_progresion=None
 pourcentage_ouverture=None
 
-def fênetre_ouverture_en_cours():
+def fênetre_ouverture_en_cours() -> None:
     global chant_texte_temporaire
     global fênetre_ouverture_en_cours_barre_de_progresion
     fênetre_ouverture_en_cours_barre_de_progresion=Tk()
@@ -1782,9 +1782,9 @@ def fênetre_ouverture_en_cours():
 
 ouverture_terminer_fênetre=None
 
-def ouverture_terminé():
+def ouverture_terminé() -> None:
     """fênetre qui s'ouvre quand l'ouverture est terminer. Posibilité : quitter ou enregistrer"""
-    def quitter_ouverture_terminé():
+    def quitter_ouverture_terminé() -> None:
         """Fonction pour quitter la fênetre"""
         global ouverture_terminer_fênetre
         ouverture_terminer_fênetre.destroy()
@@ -1810,7 +1810,7 @@ def ouverture_terminé():
 
 chemain_d_accer_fichier_enregistrer=None
 
-def enregistrer_l_image_fênetre():
+def enregistrer_l_image_fênetre() -> None:
     global chemain_d_accer_fichier_enregistrer
     chemain_d_accer_fichier_enregistrer=filedialog.asksaveasfilename(
         defaultextension=".png",
@@ -1820,13 +1820,13 @@ def enregistrer_l_image_fênetre():
     ouverture_terminer_fênetre.destroy()
     if chemain_d_accer_fichier_enregistrer=="":
         ouverture_terminé()
-    
-def enregistrement_réussit():
-    def retour_menu_principal():
+
+def enregistrement_réussit() -> None:
+    def retour_menu_principal() -> None:
         fênetre_enregistrement_réussit_fênetre.destroy()
         menu_principal()
     
-    def ouvrir_dans_explorateur():
+    def ouvrir_dans_explorateur() -> None:
         # Obtenir le chemin absolu du fichier
         chemin_absolu = os.path.abspath(chemain_d_accer_fichier_enregistrer)
         # Détecter le système d'exploitation et utiliser la commande appropriée
@@ -1871,16 +1871,16 @@ image_point=None
 
 
 
-def paramètre():
+def paramètre() -> None:
     """Cette fonction gère la fênetre de paramètre."""
     global paramètre_réglage
     global langue
-    def quitter_paramètre():
+    def quitter_paramètre() -> None:
         """Cette fonction permet de quitter les paramètre"""
         fênetre_paramètre.destroy()
         menu_principal()
     
-    def valider_paramètre():
+    def valider_paramètre() -> None:
         """Cette fonction est appeler pour enregistrer les paramètre"""
         #langue
         if liste_langue.get()=="Français":
@@ -1953,9 +1953,9 @@ def paramètre():
 
 
 fichier=None
-def menu_principal():
+def menu_principal() -> None:
     """Fenetre graphique du menu principal."""
-    def quitter_menu():
+    def quitter_menu() -> None:
         """pemret de quitter le menu"""
         fênetre_principal.destroy()
         quit()
@@ -1987,7 +1987,7 @@ def menu_principal():
 fond=None
 imageforme=None
 
-def ouverture_fichier_principal():        
+def ouverture_fichier_principal() -> None:        
     """Cette fonction gère l'ouverture d'un fichier. Elle utilise d'autre fonction pour analiser plus précisément les élément et pour tracer les élément."""
     
     # variable / dicionaire global
@@ -2126,7 +2126,7 @@ def ouverture_fichier_principal():
         
 image_pour_afficher=None
 
-def fin_de_fichier():
+def fin_de_fichier() -> None:
     # fond de l'image :
 
 
